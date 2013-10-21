@@ -14,5 +14,5 @@ Steps to open base project in NetBeans:
 6. The first two fields should populate. If not, navigate to "LaurensList\web" for the first and "LaurensList\web\WEB-INF" for the second.
 7. Leave the source package folders as they are. Click finish.
 
-The project should create and now changes will be saved to the repository location where
-they can be commited and pushed.
+The project should create and now changes will be saved to the local repository location where
+they can be commited and pushed to the remote repository.
