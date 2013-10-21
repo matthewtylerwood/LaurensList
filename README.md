@@ -4,7 +4,7 @@ LaurensList
 Repository for DCSP web project which allows customers to browse and hire contractors.
 
 NOTE: First time users will need to download and install GitHub before completing the below steps. There are several methods 
-but the easiest way to do this is here: http://windows.github.com/
+but the easiest way to do this is here: http://windows.github.com/ OR http://mac.github.com/
 
 Steps to open base project in NetBeans:
 
