@@ -14,29 +14,29 @@ Home Page for Laren's List Web Site
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
         <title> Lauren's List Home Guest </title>
-        <link rel="stylesheet" href="http://yui.yahooapis.com/pure/0.3.0/pure-nr-min.css">
+        <link rel="stylesheet" href="http://yui.yahooapis.com/pure/0.3.0/pure-nr-min.css" />
+        <link rel="stylesheet" href="style.css" />
         <style>
             #center{
                 text-align:center;
-                color:darkviolet;
                 margin-top:50px;
             }
-            #right{
+            #topRight{
                 text-align:right;
             }
         </style>
     </head>
 
-    <body>
-        <div id=right>
+    <body class="pure-skin-matt">
+        <div id="topRight">
             <p>
                 <a class="pure-button" href=""> Login </a> &nbsp;
                 <a class="pure-button" href=""> Create Account </a> &nbsp;
             </p>
         </div>
-        <div id=center>
+        <div id="center">
             <img src="images/LLLogo.jpg" alt="Lauren's List Logo" />
-            <h1 style="font-size:500%"> Lauren's List </h1>
+            <h1 style="font-size:500%; color:darkviolet;"> Lauren's List </h1>
             <form action="" method="" class="pure-form">
                 <p>
                     <input type="text" name="search" size="70" style="font-size:14pt" class="pure-input-rounded" /> &nbsp;
