@@ -956,3 +956,59 @@ margin: 7px 2px;
 
 /* User CSS */
 
+body{ 
+/*background-color:#dc8;*/
+/*font-size:16px; */
+margin:0; 
+padding:0; 
+}
+
+#header{ 
+background-color:#333;
+position:relative;
+height:150px;
+}
+
+#top{ 
+width:100%;
+background-color:#dc8; 
+height:38px;
+}
+
+#center { 
+background-color:#eec; 
+min-height:600px; /* for modern browsers */
+height:auto !important; /* for modern browsers */
+height:600px; /* for IE5.x and IE6 */
+}
+
+#footer { 
+clear:both;
+background-color:#333;
+height:100px;
+}
+.right{
+position:absolute;
+right:0px;
+}
+.left{
+position:absolute;
+left:0px;
+}
+.center
+{
+margin-left:auto;
+margin-right:auto;
+width:70%;
+padding:100px;
+}
+.bottom_header{
+float: left;
+float:bottom;
+padding: 30px 10px 11px
+}
+h1{
+font-size:300%;
+color:darkviolet;
+display:inline
+}

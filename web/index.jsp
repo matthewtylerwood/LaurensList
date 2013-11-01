@@ -30,13 +30,13 @@ Home Page for Laren's List Web Site
     <body class="pure-skin-matt">
         <div id="topRight">
             <p>
-                <a class="pure-button" href=""> Login </a> &nbsp;
+                <a class="pure-button" href="login.html"> Login </a> &nbsp;
                 <a class="pure-button" href=""> Create Account </a> &nbsp;
             </p>
         </div>
         <div id="center">
             <img src="images/LLLogo.jpg" alt="Lauren's List Logo" />
-            <h1 style="font-size:500%; color:darkviolet;"> Lauren's List </h1>
+            <h1 style="font-size:500%; color:darkviolet; display:block"> Lauren's List </h1>
             <form action="" method="" class="pure-form">
                 <p>
                     <input type="text" name="search" size="70" style="font-size:14pt" class="pure-input-rounded" /> &nbsp;
