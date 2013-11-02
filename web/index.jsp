@@ -32,7 +32,7 @@ Home Page for Lauren's List Web Site
         <div id="topRight">
             <p>
                 <a class="pure-button" href="login.html"> Login </a> &nbsp;
-                <a class="pure-button" href="createAccount.html"> Create Account </a> &nbsp;
+                <a class="pure-button" href="customerOrContractor.html"> Create Account </a> &nbsp;
             </p>
         </div>
         <div id="center">
