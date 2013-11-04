@@ -2,6 +2,7 @@
 ## Net Beans
 #################
 
+lib/
 build/
 dist/
 nbproject/
