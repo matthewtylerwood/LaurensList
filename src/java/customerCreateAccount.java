@@ -33,7 +33,7 @@ public class customerCreateAccount extends HttpServlet {
             String lastName = request.getParameter("lastName");
             String email = request.getParameter("email");
             String password = request.getParameter("password");
-            String confirmPassword = request.getParameter("confirmPassword");
+            String confirmPassword = request.getParameter("passwordConfirm");
 
             if (email.equals("") || password.equals("") || confirmPassword.equals("")) {
                 response.sendRedirect("createAccount.html");
@@ -43,13 +43,13 @@ public class customerCreateAccount extends HttpServlet {
 
                 try {
                     statement = conn.createStatement();
-                    customerResult = statement.executeQuery("SELECT * FROM Customers WHERE email=\'" + email + "\'");
+                    customerResult = statement.executeQuery("SELECT * FROM Customer WHERE email=\'" + email + "\'");
                     boolean customerFound = customerResult.next();
                     //managerResult = statement.executeQuery("SELECT * FROM Managers WHERE ID=\'" + email + "\'");
                     //boolean managerFound = managerResult.next();
 
                     if (!customerFound)/* && !managerFound)*/ {
-                        String statString = "INSERT INTO Customers (`email`, `password`, `first_name`"
+                        String statString = "INSERT INTO Customer (`email`, `password`, `first_name`"
                                 + ", `last_name`) VALUES (?, MD5(?), ?, ?)";
                         stat = conn.prepareStatement(statString);
                         stat.setString(1, email);
