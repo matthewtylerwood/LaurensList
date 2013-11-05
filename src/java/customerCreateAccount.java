@@ -57,7 +57,7 @@ public class customerCreateAccount extends HttpServlet {
                         stat.setString(3, firstName);
                         stat.setString(4, lastName);
                         stat.executeUpdate();
-                        response.sendRedirect("homePage");
+                        response.sendRedirect("index.jsp"); //change later
                     } else {
                         response.sendRedirect("createAccount.html");
                     }

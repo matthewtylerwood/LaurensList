@@ -45,16 +45,20 @@ Create Customer Account for Lauren's List Web Site
             </ul>
         </div>
         <div id="center">
-            <form action="" method="post" class="pure-form pure-form-aligned">
+            <form action="customerCreateAccount.java" method="post" class="pure-form pure-form-aligned">
                 <div class="center">
                 <fieldset>
                     <legend> Create Account </legend>
                     <div class="pure-control-group">
-                        <label for="name">Name</label>
-                        <input name="name" type="text" />
+                        <label for="firstname">First Name</label>
+                        <input name="firstName" type="text" />
                     </div>
                     <div class="pure-control-group">
-                        <label for="name">Email</label>
+                        <label for="lastName">Last Name</label>
+                        <input name="lastName" type="text" />
+                    </div>
+                    <div class="pure-control-group">
+                        <label for="email">Email</label>
                         <input name="email" type="text" />
                     </div>
                     <div class="pure-control-group">
@@ -62,14 +66,14 @@ Create Customer Account for Lauren's List Web Site
                         <input name="password" type="password" />
                     </div>
                     <div class="pure-control-group">
-                        <label for="password">Confirm Password</label>
+                        <label for="passwordConfirm">Confirm Password</label>
                         <input name="passwordConfirm" type="password" />
-                        <label for="password">Add Credit Card</label>
+                        <label for="credit">Add Credit Card</label>
                         <input name="credit" type="checkbox" id="chkBox" onclick="showhide();" />
                     </div>
                     <div id="idBox" style="display:none;">
                         <div class="pure-control-group">
-                            <label for="name">Credit Card #</label>
+                            <label for="cardNum">Credit Card #</label>
                             <input name="cardNum" type="text" />
                         </div>
                     </div>
