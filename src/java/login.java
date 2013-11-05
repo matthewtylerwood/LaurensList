@@ -36,7 +36,7 @@ public class login extends HttpServlet {
            
            if (customerLogin) //(managerLogin && !contractorLogin && !customerLogin) 
            {
-               response.sendRedirect("adminHome");              
+               response.sendRedirect("homePage"); //response.sendRedirect("adminHome");              
            } 
 //           else if(!managerLogin && contractorLogin && !customerLogin) 
 //           {
@@ -62,18 +62,21 @@ public class login extends HttpServlet {
     }
 
 
+    @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         processRequest(request, response);
     }
 
  
+    @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         processRequest(request, response);
     }
 
 
+    @Override
     public String getServletInfo() {
         return "Short description";
     }
