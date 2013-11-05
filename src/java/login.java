@@ -21,28 +21,34 @@ public class login extends HttpServlet {
         PrintWriter out = response.getWriter();
         
         
-//        Manager manager = new Manager();
+//        Administrator administrator = new Administrator();
+//        Contractor contractor = new Contractor();
         Customer customer = new Customer();
         
         try 
         {
-           String userName = request.getParameter("userName"); 
+           String email = request.getParameter("email"); 
            String password = request.getParameter("password");
            
-//           boolean managerLogin = manager.login(userName, password, out, request);
-           boolean customerLogin = customer.login(userName, password, out, request);
+//           boolean administratorLogin = administrator.login(email, password, out, request);
+//           boolean contractorLogin = contractor.login(email, password, out, request);
+           boolean customerLogin = customer.login(email, password, out, request);
            
-           if (customerLogin) //(managerLogin && !customerLogin) 
+           if (customerLogin) //(managerLogin && !contractorLogin && !customerLogin) 
            {
-               response.sendRedirect("managerHome");              
+               response.sendRedirect("adminHome");              
            } 
-//           else if(customerLogin && !managerLogin) 
+//           else if(!managerLogin && contractorLogin && !customerLogin) 
+//           {
+//               response.sendRedirect("contractorPage");
+//           }
+//           else if(!managerLogin && !contractorLogin && customerLogin) 
 //           {
 //               response.sendRedirect("homePage");
 //           }
            else
            {
-               response.sendRedirect("loginSignUp.html");
+               response.sendRedirect("login.html");
            }
         } 
         catch (Exception ex) 
