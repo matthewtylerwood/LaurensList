@@ -1,6 +1,5 @@
 package database;
 
-import .*;
 import java.sql.*;
 
 public class DBUtilities
