@@ -84,7 +84,7 @@ public class Customer {
                 setLastName(customerResult.getString("last_name"));
                                 
                 httpSession.setAttribute("user", this);
-                //httpSession.setAttribute("userType", userType);
+                httpSession.setAttribute("userType", userType);
             }
         } 
         catch (SQLException ex)
