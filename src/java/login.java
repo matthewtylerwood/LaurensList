@@ -21,7 +21,7 @@ public class login extends HttpServlet {
         PrintWriter out = response.getWriter();
         
         
-//        Administrator administrator = new Administrator();
+        Admin admin = new Admin();
         Contractor contractor = new Contractor();
         Customer customer = new Customer();
         
@@ -30,15 +30,15 @@ public class login extends HttpServlet {
            String email = request.getParameter("email"); 
            String password = request.getParameter("password");
            
-//           boolean administratorLogin = administrator.login(email, password, out, request);
+           boolean adminLogin = admin.login(email, password, out, request);
            boolean contractorLogin = contractor.login(email, password, out, request);
            boolean customerLogin = customer.login(email, password, out, request);
            
-//           if (/*!managerLogin &&*/ !contractorLogin && !customerLogin) 
-//           {
-//               //response.sendRedirect("adminHome");              
-//           } 
-           if(/*!managerLogin &&*/ contractorLogin && !customerLogin) //change to else if later
+           if (adminLogin && !contractorLogin && !customerLogin) 
+           {
+               response.sendRedirect("homePage"); //change to admin page
+           } 
+           else if(!adminLogin && contractorLogin && !customerLogin)
            {
                response.sendRedirect("homePage"); //change to contractor page
            }

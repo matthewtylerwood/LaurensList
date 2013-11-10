@@ -35,6 +35,7 @@ public class homePage extends HttpServlet {
         String firstName = "";
         String lastName = "";
         String company = "";
+        String adminEmail = "";
         HttpSession httpSession;
         
         if(request.getSession(false) != null)
@@ -52,6 +53,12 @@ public class homePage extends HttpServlet {
                 Contractor contractor = (Contractor)httpSession.getAttribute("user");
                 company = contractor.getCompany();
                 userType = "contractor";
+            }
+            else if(httpSession.getAttribute("userType").equals("admin"))
+            {
+                Admin admin = (Admin)httpSession.getAttribute("user");
+                adminEmail = admin.getEmail();
+                userType = "admin";
             }
         }
              
@@ -94,6 +101,10 @@ public class homePage extends HttpServlet {
             }
             else if(userType.equals("customer")){
                 out.println("<a class=\"pure-button\" href=\"#\"> Welcome, " + firstName + " " + lastName + " </a> &nbsp;");
+                out.println("<a class=\"pure-button\" href=\"logout\"> Logout </a> &nbsp;<br/><br/>");
+            }
+            else if(userType.equals("admin")){
+                out.println("<a class=\"pure-button\" href=\"#\"> Welcome, " + adminEmail + " </a> &nbsp;");
                 out.println("<a class=\"pure-button\" href=\"logout\"> Logout </a> &nbsp;<br/><br/>");
             }
             out.println("<a class=\"pure-button\" href=\"about.html\"> What is Lauren's List? </a> &nbsp;");

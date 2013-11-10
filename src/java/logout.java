@@ -40,6 +40,12 @@ public class logout extends HttpServlet {
             customer.logout(request);
             response.sendRedirect("homePage");
         }
+        else if (httpSession.getAttribute("userType").equals("admin"))
+        {
+            Admin admin = (Admin)httpSession.getAttribute("user");
+            admin.logout(request);
+            response.sendRedirect("homePage");
+        }
         
         try {
             /* TODO output your page here. You may use following sample code. */

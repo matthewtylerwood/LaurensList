@@ -42,6 +42,7 @@ public class contractorCreateAccount extends HttpServlet {
         Statement statement = null;
         ResultSet customerResult = null;
         ResultSet contractorResult = null;
+        ResultSet adminResult = null;
         Contractor contractor = new Contractor();
         
         try {
@@ -64,8 +65,10 @@ public class contractorCreateAccount extends HttpServlet {
                     boolean customerFound = customerResult.next();
                     contractorResult = statement.executeQuery("SELECT * FROM Contractor WHERE email=\'" + email + "\'");
                     boolean contractorFound = contractorResult.next();
+                    adminResult = statement.executeQuery("SELECT * FROM Admin WHERE email=\'" + email + "\'");
+                    boolean adminFound = adminResult.next();
 
-                    if (!customerFound && !contractorFound) {
+                    if (!customerFound && !contractorFound && !adminFound) {
                         String statString = "INSERT INTO Contractor (`email`, `password`, `company`"
                                 + ", `phone`, `info`) VALUES (?, MD5(?), ?, ?, ?)";
                         stat = conn.prepareStatement(statString);
