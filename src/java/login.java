@@ -22,7 +22,7 @@ public class login extends HttpServlet {
         
         
 //        Administrator administrator = new Administrator();
-//        Contractor contractor = new Contractor();
+        Contractor contractor = new Contractor();
         Customer customer = new Customer();
         
         try 
@@ -31,23 +31,22 @@ public class login extends HttpServlet {
            String password = request.getParameter("password");
            
 //           boolean administratorLogin = administrator.login(email, password, out, request);
-//           boolean contractorLogin = contractor.login(email, password, out, request);
+           boolean contractorLogin = contractor.login(email, password, out, request);
            boolean customerLogin = customer.login(email, password, out, request);
            
-           if (customerLogin) //(managerLogin && !contractorLogin && !customerLogin) 
-           {
-               response.sendRedirect("homePage"); //response.sendRedirect("adminHome");              
-           } 
-//           else if(!managerLogin && contractorLogin && !customerLogin) 
+//           if (/*!managerLogin &&*/ !contractorLogin && !customerLogin) 
 //           {
-//               response.sendRedirect("contractorPage");
-//           }
-//           else if(!managerLogin && !contractorLogin && customerLogin) 
-//           {
-//               response.sendRedirect("homePage");
-//           }
-           else
+//               //response.sendRedirect("adminHome");              
+//           } 
+           if(/*!managerLogin &&*/ contractorLogin && !customerLogin) //change to else if later
            {
+               response.sendRedirect("homePage"); //change to contractor page
+           }
+           else if(/*!managerLogin &&*/ !contractorLogin && customerLogin) 
+           {
+               response.sendRedirect("homePage");
+           }
+           else{
                response.sendRedirect("login.html");
            }
         } 

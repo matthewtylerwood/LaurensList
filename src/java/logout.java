@@ -28,10 +28,10 @@ public class logout extends HttpServlet {
         
         HttpSession httpSession = request.getSession();
         
-        if(httpSession.getAttribute("userType").equals("MAN"))
+        if(httpSession.getAttribute("userType").equals("contractor"))
         {
-            //Manager manager = (Manager)httpSession.getAttribute("user");
-            //manager.logout(request);
+            Contractor contractor = (Contractor)httpSession.getAttribute("user");
+            contractor.logout(request);
             response.sendRedirect("homePage");
         }
         else if (httpSession.getAttribute("userType").equals("customer"))

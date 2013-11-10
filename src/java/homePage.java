@@ -31,8 +31,10 @@ public class homePage extends HttpServlet {
         response.setContentType("text/html;charset=UTF-8");
         PrintWriter out = response.getWriter();
         
-        String firstName = "Guest";
+        String userType = "Guest";
+        String firstName = "";
         String lastName = "";
+        String company = "";
         HttpSession httpSession;
         
         if(request.getSession(false) != null)
@@ -43,7 +45,14 @@ public class homePage extends HttpServlet {
                 Customer customer = (Customer)httpSession.getAttribute("user");
                 firstName = customer.getFirstName();
                 lastName = customer.getLastName();
-            }   
+                userType = "customer";
+            }
+            else if(httpSession.getAttribute("userType").equals("contractor"))
+            {
+                Contractor contractor = (Contractor)httpSession.getAttribute("user");
+                company = contractor.getCompany();
+                userType = "contractor";
+            }
         }
              
         try {
@@ -75,11 +84,15 @@ public class homePage extends HttpServlet {
             out.println("<div id=\"topRight\">");
             out.println("<p>");
             
-            if(firstName.equals("Guest")){
+            if(userType.equals("Guest")){
                 out.println("<a class=\"pure-button\" href=\"login.html\"> Login </a> &nbsp;");
                 out.println("<a class=\"pure-button\" href=\"customerOrContractor.html\"> Create Account </a> &nbsp;<br/><br/>");
             }
-            else{
+            else if(userType.equals("contractor")){
+                out.println("<a class=\"pure-button\" href=\"#\"> Welcome, " + company + " </a> &nbsp;");
+                out.println("<a class=\"pure-button\" href=\"logout\"> Logout </a> &nbsp;<br/><br/>");
+            }
+            else if(userType.equals("customer")){
                 out.println("<a class=\"pure-button\" href=\"#\"> Welcome, " + firstName + " " + lastName + " </a> &nbsp;");
                 out.println("<a class=\"pure-button\" href=\"logout\"> Logout </a> &nbsp;<br/><br/>");
             }
