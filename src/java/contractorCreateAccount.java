@@ -53,7 +53,7 @@ public class contractorCreateAccount extends HttpServlet {
             String confirmPassword = request.getParameter("passwordConfirm");
             String info = request.getParameter("info");
 
-            if (email.equals("") || password.equals("") || confirmPassword.equals("") || company.equals("") || phone.equals("") || info.equals("")) {
+            if (email.equals("") || password.equals("") || confirmPassword.equals("") || company.equals("") || phone.equals("") || info.equals("") || info.equals("Please put your Company info here")) {
                 response.sendRedirect("contractorCreateAccount.html");
             } else if (!password.equals(confirmPassword)) {
                 response.sendRedirect("contractorCreateAccount.html");
