@@ -40,7 +40,7 @@ Home Page for Lauren's List Web Site
         <div id="center">
             <img src="images/LLLogo.jpg" alt="Lauren's List Logo" />
             <h1 style="font-size:500%; color:darkviolet; display:block"> Lauren's List </h1>
-            <form action="" method="get" class="pure-form">
+            <form action="search" method="get" class="pure-form">
                 <p>
                     <input type="text" name="search" size="70" style="font-size:14pt" class="pure-input-rounded" /> &nbsp;
                     <input type="submit" value="Search" style="font-size:14pt" class="pure-button" />

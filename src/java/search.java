@@ -1,44 +1,43 @@
+
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.sql.Connection;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
 import java.sql.SQLException;
-import java.util.logging.Level;
-import java.util.logging.Logger;
+import java.sql.Statement;
 import javax.servlet.ServletException;
-import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
-/**
- * Displays the homepage for Customers.
- */
-@WebServlet(name = "homePage", urlPatterns = {"/homePage"})
-public class homePage extends HttpServlet {
+
+public class search extends HttpServlet {
     
     /**
      * Processes requests for both HTTP
      * <code>GET</code> and
      * <code>POST</code> methods.
-     *  
+     *
      * @param request servlet request
      * @param response servlet response
      * @throws ServletException if a servlet-specific error occurs
      * @throws IOException if an I/O error occurs
      */
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
-            throws ServletException, IOException, SQLException {
+            throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
         PrintWriter out = response.getWriter();
         
         String userType = "Guest";
+        HttpSession httpSession;
         String firstName = "";
         String lastName = "";
         String company = "";
         String adminEmail = "";
-        HttpSession httpSession;
         
-        if(request.getSession(false) != null)
+        /*if(request.getSession(false) != null)
         {
             httpSession = request.getSession();
             if (httpSession.getAttribute("userType").equals("customer"))
@@ -60,77 +59,99 @@ public class homePage extends HttpServlet {
                 adminEmail = admin.getEmail();
                 userType = "admin";
             }
-        }
-             
-        try {
+        }*/
+        
+        String keywords = request.getParameter("search");
+        
+        DBConnections dataSource = DBConnections.getInstance();
+        Connection conn = dataSource.getConnection();
+        PreparedStatement stat = null;
+        ResultSet result = null;
+        String statString;
+        
+        try 
+        {
+            statString = "SELECT * FROM Contractor WHERE company LIKE ? OR info LIKE ?;";
+            stat = conn.prepareStatement(statString);
+            stat.setString(1, "%" + keywords + "%");
+            stat.setString(2, "%" + keywords + "%");
+            result = stat.executeQuery();
+            
             out.println("<?xml version = \"1.0\" encoding = \"utf-8\" ?>");
             out.println("<!DOCTYPE html PUBLIC \"-//W3C//DTD XHTML 1.0 Strict//EN\"");
             out.println("\"http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd\">");
             out.println("<!--");
-            out.println("Home Page for Lauren's List Web Site");
+            out.println("Change Password for Lauren's List Web Site");
             out.println("-->");
             out.println("<html xmlns=\"http://www.w3.org/1999/xhtml\">");
             out.println("<head>");
             out.println("<meta http-equiv=\"Content-Type\" content=\"text/html; charset=utf-8\" />");
-            out.println("<title> Lauren's List Home Guest </title>");
+            out.println("<title> Change Password </title>");
             out.println("<link rel=\"stylesheet\" href=\"http://yui.yahooapis.com/pure/0.3.0/pure-nr-min.css\" />");
             out.println("<link rel=\"stylesheet\" href=\"style.css\" />");
-            out.println("<style>");
-            out.println("#center{");
-            out.println("text-align:center;");
-            out.println("margin-top:50px;");
-            out.println("padding:50px;");
-            out.println("}");
-            out.println("#topRight{");
-            out.println("text-align:right;");
-            out.println("}");
-            out.println("</style>");
             out.println("</head>");
-
             out.println("<body class=\"pure-skin-matt\">");
-            out.println("<div id=\"topRight\">");
-            out.println("<p>");
+            out.println("<div id=\"header\">");
+            out.println("<div class=\"bottom_header\">");
+            out.println("<a href=\"index.jsp\"><img src=\"images/LLLogoSmall.jpg\" alt=\"Lauren's List Logo\" /></a>");
+            out.println("<h1> Lauren's List </h1>");
+            out.println("</div>");
+            out.println("<div class=\"right\" style=\"display:inline-block\">");
+            out.println("<br/>");
+
             
-            if(userType.equals("Guest")){
-                out.println("<a class=\"pure-button\" href=\"login.html\"> Login </a> &nbsp;");
-                out.println("<a class=\"pure-button\" href=\"customerOrContractor.html\"> Create Account </a> &nbsp;<br/><br/>");
-            }
-            else if(userType.equals("contractor")){
-                out.println("<a class=\"pure-button\" href=\"changePassword\"> Welcome, " + company + " </a> &nbsp;");
-                out.println("<a class=\"pure-button\" href=\"logout\"> Logout </a> &nbsp;<br/><br/>");
-            }
-            else if(userType.equals("customer")){
-                out.println("<a class=\"pure-button\" href=\"changePassword\"> Welcome, " + firstName + " " + lastName + " </a> &nbsp;");
-                out.println("<a class=\"pure-button\" href=\"logout\"> Logout </a> &nbsp;<br/><br/>");
-            }
-            else if(userType.equals("admin")){
-                out.println("<a class=\"pure-button\" href=\"changePassword\"> Welcome, " + adminEmail + " </a> &nbsp;");
-                out.println("<a class=\"pure-button\" href=\"logout\"> Logout </a> &nbsp;<br/><br/>");
-            }
-            out.println("<a class=\"pure-button\" href=\"about.html\"> What is Lauren's List? </a> &nbsp;");
-                
-            out.println("</p>");
+            out.println("</div>");
+            out.println("</div>");
+            out.println("<div id=\"top\" class=\"pure-menu-horizontal pure-menu pure-menu-open\">");
+            out.println("<ul>");
+            out.println("<li><a href=\"index.jsp\">Home</a></li>");
+            out.println("<li><a href=\"#\">Browse Contractors</a></li>");
+            out.println("<li><a href=\"about.html\">About</a></li>");
+            out.println("</ul>");
             out.println("</div>");
             out.println("<div id=\"center\">");
-            out.println("<img src=\"images/LLLogo.jpg\" alt=\"Lauren's List Logo\" />");
-            out.println("<h1 style=\"font-size:500%; color:darkviolet; display:block\"> Lauren's List </h1>");
-            out.println("<form action=\"search\" method=\"get\" class=\"pure-form\">");
-            out.println("<p>");
-            out.println("<input type=\"text\" name=\"search\" size=\"70\" style=\"font-size:14pt\" class=\"pure-input-rounded\" /> &nbsp;");
-            out.println("<input type=\"submit\" value=\"Search\" style=\"font-size:14pt\" class=\"pure-button\" />");
-            out.println("</p>");
+            out.println("<form action=\"savePassword\" method=\"post\" class=\"pure-form pure-form-aligned\">");
+            out.println("<div class=\"center\">");
+            out.println("<fieldset>");
+            out.println("<legend> Search Results </legend>");
+            while(result.next())
+            {
+                
+                
+                out.println( result.getString("company"));
+                out.println("<br/>");
+                out.println( result.getString("info"));
+                out.println("<br/>");
+                out.println("<hr/>");
+            }
+            out.println("</table>");
+            out.println("    </body>");
+            out.println("</html>");
+            
+            out.println("</fieldset>");
+            out.println("</div>");
             out.println("</form>");
             out.println("</div>");
-            out.println("</body>");
+            out.println("</body>");             
             out.println("</html>");
-
-        }catch (Exception ex) {
-                ex.printStackTrace();
-        } finally {            
-            out.close();
         }
+        
+        catch (SQLException ex)
+        {
+            out.println("SQLException in Query.java");
+            ex.printStackTrace(out);
+        }
+        
+        finally
+        {
+            out.close();
+            DBUtilities.closeResultSet(result);
+            DBUtilities.closeStatement(stat);
+            dataSource.freeConnection(conn);
+        }
+        
+        
     }
-
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
     /**
      * Handles the HTTP
@@ -144,11 +165,7 @@ public class homePage extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        try {
-            processRequest(request, response);
-        } catch (SQLException ex) {
-            Logger.getLogger(homePage.class.getName()).log(Level.SEVERE, null, ex);
-        }
+        processRequest(request, response);
     }
 
     /**
@@ -163,11 +180,7 @@ public class homePage extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        try {
-            processRequest(request, response);
-        } catch (SQLException ex) {
-            Logger.getLogger(homePage.class.getName()).log(Level.SEVERE, null, ex);
-        }
+        processRequest(request, response);
     }
 
     /**
@@ -179,4 +192,6 @@ public class homePage extends HttpServlet {
     public String getServletInfo() {
         return "Short description";
     }// </editor-fold>
+    
+    
 }
