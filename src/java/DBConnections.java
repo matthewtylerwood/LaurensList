@@ -15,7 +15,7 @@ public class DBConnections
 
             username = "dcsp03";
             password = "Group3pw1$";
-            url = "jdbc:mysql://localhost:3306/" + username;
+            url = "jdbc:mysql://localhost/" + username;
 
             Class.forName(driver);
         }
