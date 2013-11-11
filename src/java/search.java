@@ -83,12 +83,12 @@ public class search extends HttpServlet {
             out.println("<!DOCTYPE html PUBLIC \"-//W3C//DTD XHTML 1.0 Strict//EN\"");
             out.println("\"http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd\">");
             out.println("<!--");
-            out.println("Change Password for Lauren's List Web Site");
+            out.println("Search Results for Lauren's List Web Site");
             out.println("-->");
             out.println("<html xmlns=\"http://www.w3.org/1999/xhtml\">");
             out.println("<head>");
             out.println("<meta http-equiv=\"Content-Type\" content=\"text/html; charset=utf-8\" />");
-            out.println("<title> Change Password </title>");
+            out.println("<title> Search Results </title>");
             out.println("<link rel=\"stylesheet\" href=\"http://yui.yahooapis.com/pure/0.3.0/pure-nr-min.css\" />");
             out.println("<link rel=\"stylesheet\" href=\"style.css\" />");
             out.println("</head>");
