@@ -37,29 +37,31 @@ public class search extends HttpServlet {
         String company = "";
         String adminEmail = "";
         
-        /*if(request.getSession(false) != null)
+        if(request.getSession(false) != null)
         {
             httpSession = request.getSession();
-            if (httpSession.getAttribute("userType").equals("customer"))
-            {
-                Customer customer = (Customer)httpSession.getAttribute("user");
-                firstName = customer.getFirstName();
-                lastName = customer.getLastName();
-                userType = "customer";
+            if(httpSession.getAttribute("userType") != null){
+                if (httpSession.getAttribute("userType").equals("customer"))
+                {
+                    Customer customer = (Customer)httpSession.getAttribute("user");
+                    firstName = customer.getFirstName();
+                    lastName = customer.getLastName();
+                    userType = "customer";
+                }
+                else if(httpSession.getAttribute("userType").equals("contractor"))
+                {
+                    Contractor contractor = (Contractor)httpSession.getAttribute("user");
+                    company = contractor.getCompany();
+                    userType = "contractor";
+                }
+                else if(httpSession.getAttribute("userType").equals("admin"))
+                {
+                    Admin admin = (Admin)httpSession.getAttribute("user");
+                    adminEmail = admin.getEmail();
+                    userType = "admin";
+                }
             }
-            else if(httpSession.getAttribute("userType").equals("contractor"))
-            {
-                Contractor contractor = (Contractor)httpSession.getAttribute("user");
-                company = contractor.getCompany();
-                userType = "contractor";
-            }
-            else if(httpSession.getAttribute("userType").equals("admin"))
-            {
-                Admin admin = (Admin)httpSession.getAttribute("user");
-                adminEmail = admin.getEmail();
-                userType = "admin";
-            }
-        }*/
+        }
         
         String keywords = request.getParameter("search");
         
@@ -98,7 +100,23 @@ public class search extends HttpServlet {
             out.println("</div>");
             out.println("<div class=\"right\" style=\"display:inline-block\">");
             out.println("<br/>");
-
+            
+            if(userType.equals("Guest")){
+                out.println("<a class=\"pure-button\" href=\"login.html\"> Login </a> &nbsp;");
+                out.println("<a class=\"pure-button\" href=\"customerOrContractor.html\"> Create Account </a> &nbsp;");
+            }
+            else if(userType.equals("contractor")){
+                out.println("<a class=\"pure-button\" href=\"changePassword\"> " + company + " </a> &nbsp;");
+                out.println("<a class=\"pure-button\" href=\"logout\"> Logout </a> &nbsp;<br/><br/>");
+            }
+            else if(userType.equals("customer")){
+                out.println("<a class=\"pure-button\" href=\"changePassword\"> " + firstName + " " + lastName + " </a> &nbsp;");
+                out.println("<a class=\"pure-button\" href=\"logout\"> Logout </a> &nbsp;<br/><br/>");
+            }
+            else if(userType.equals("admin")){
+                out.println("<a class=\"pure-button\" href=\"changePassword\"> " + adminEmail + " </a> &nbsp;");
+                out.println("<a class=\"pure-button\" href=\"logout\"> Logout </a> &nbsp;<br/><br/>");
+            }
             
             out.println("</div>");
             out.println("</div>");

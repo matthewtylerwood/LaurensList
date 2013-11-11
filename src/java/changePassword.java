@@ -43,24 +43,29 @@ public class changePassword extends HttpServlet {
         if(request.getSession(false) != null)
         {
             httpSession = request.getSession();
-            if (httpSession.getAttribute("userType").equals("customer"))
-            {
-                Customer customer = (Customer)httpSession.getAttribute("user");
-                firstName = customer.getFirstName();
-                lastName = customer.getLastName();
-                userType = "customer";
+            if(httpSession.getAttribute("userType") != null){
+                if (httpSession.getAttribute("userType").equals("customer"))
+                {
+                    Customer customer = (Customer)httpSession.getAttribute("user");
+                    firstName = customer.getFirstName();
+                    lastName = customer.getLastName();
+                    userType = "customer";
+                }
+                else if(httpSession.getAttribute("userType").equals("contractor"))
+                {
+                    Contractor contractor = (Contractor)httpSession.getAttribute("user");
+                    company = contractor.getCompany();
+                    userType = "contractor";
+                }
+                else if(httpSession.getAttribute("userType").equals("admin"))
+                {
+                    Admin admin = (Admin)httpSession.getAttribute("user");
+                    adminEmail = admin.getEmail();
+                    userType = "admin";
+                }
             }
-            else if(httpSession.getAttribute("userType").equals("contractor"))
-            {
-                Contractor contractor = (Contractor)httpSession.getAttribute("user");
-                company = contractor.getCompany();
-                userType = "contractor";
-            }
-            else if(httpSession.getAttribute("userType").equals("admin"))
-            {
-                Admin admin = (Admin)httpSession.getAttribute("user");
-                adminEmail = admin.getEmail();
-                userType = "admin";
+            else{
+                response.sendRedirect("homePage");
             }
         }
              
