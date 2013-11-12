@@ -40,7 +40,7 @@ public class login extends HttpServlet {
            } 
            else if(!adminLogin && contractorLogin && !customerLogin)
            {
-               response.sendRedirect("homePage"); //change to contractor page
+               response.sendRedirect("contractorProfile");
            }
            else if(/*!managerLogin &&*/ !contractorLogin && customerLogin) 
            {

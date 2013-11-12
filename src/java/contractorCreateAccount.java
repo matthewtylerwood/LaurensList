@@ -79,7 +79,7 @@ public class contractorCreateAccount extends HttpServlet {
                         stat.setString(5, info);
                         stat.executeUpdate();
                         contractor.login(email, password, out, request);
-                        response.sendRedirect("homePage"); //change to contractor page
+                        response.sendRedirect("contractorProfile");
                     } else {
                         response.sendRedirect("contractorCreateAccount.html");
                     }
