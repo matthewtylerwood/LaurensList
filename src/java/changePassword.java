@@ -114,7 +114,7 @@ public class changePassword extends HttpServlet {
             out.println("<div id=\"top\" class=\"pure-menu-horizontal pure-menu pure-menu-open\">");
             out.println("<ul>");
             out.println("<li><a href=\"homePage\">Home</a></li>");
-            out.println("<li><a href=\"#\">Browse Contractors</a></li>");
+            out.println("<li><a href=\"search?search=\">Browse Contractors</a></li>");
             out.println("<li><a href=\"about\">About</a></li>");
             out.println("</ul>");
             out.println("</div>");
