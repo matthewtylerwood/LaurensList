@@ -98,7 +98,7 @@ public class homePage extends HttpServlet {
                 out.println("<a class=\"pure-button\" href=\"customerOrContractor.html\"> Create Account </a> &nbsp;<br/><br/>");
             }
             else if(userType.equals("contractor")){
-                out.println("<a class=\"pure-button\" href=\"changePassword\"> Welcome, " + company + " </a> &nbsp;");
+                out.println("<a class=\"pure-button\" href=\"contractorProfile\"> " + company + " </a> &nbsp;");
                 out.println("<a class=\"pure-button\" href=\"logout\"> Logout </a> &nbsp;<br/><br/>");
             }
             else if(userType.equals("customer")){

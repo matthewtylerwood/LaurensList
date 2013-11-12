@@ -92,14 +92,15 @@ public class contractorProfile extends HttpServlet {
             out.println("<body class=\"pure-skin-matt\">");
             out.println("<div id=\"header\">");
             out.println("<div class=\"bottom_header\">");
-            out.println("<a href=\"index.jsp\"><img src=\"images/LLLogoSmall.jpg\" alt=\"Lauren's List Logo\" /></a>");
+            out.println("<a href=\"homePage\"><img src=\"images/LLLogoSmall.jpg\" alt=\"Lauren's List Logo\" /></a>");
             out.println("<h1> Lauren's List </h1>");
             out.println("</div>");
             out.println("<div class=\"right\" style=\"display:inline-block\">");
             out.println("<br/>");
             
             
-            out.println("<a class=\"pure-button\" href=\"changePassword\"> " + company + " </a> &nbsp;");
+            out.println("<a class=\"pure-button\" href=\"contractorProfile\"> " + company + " </a> &nbsp;");
+            out.println("<a class=\"pure-button\" href=\"changePassword\"> Change Password </a> &nbsp;");
             out.println("<a class=\"pure-button\" href=\"logout\"> Logout </a> &nbsp;<br/><br/>");
             
                         
