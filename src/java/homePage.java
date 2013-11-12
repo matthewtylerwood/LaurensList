@@ -109,7 +109,7 @@ public class homePage extends HttpServlet {
                 out.println("<a class=\"pure-button\" href=\"changePassword\"> Welcome, " + adminEmail + " </a> &nbsp;");
                 out.println("<a class=\"pure-button\" href=\"logout\"> Logout </a> &nbsp;<br/><br/>");
             }
-            out.println("<a class=\"pure-button\" href=\"about.html\"> What is Lauren's List? </a> &nbsp;");
+            out.println("<a class=\"pure-button\" href=\"about\"> What is Lauren's List? </a> &nbsp;");
                 
             out.println("</p>");
             out.println("</div>");

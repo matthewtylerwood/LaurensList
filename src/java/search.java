@@ -95,7 +95,7 @@ public class search extends HttpServlet {
             out.println("<body class=\"pure-skin-matt\">");
             out.println("<div id=\"header\">");
             out.println("<div class=\"bottom_header\">");
-            out.println("<a href=\"index.jsp\"><img src=\"images/LLLogoSmall.jpg\" alt=\"Lauren's List Logo\" /></a>");
+            out.println("<a href=\"homePage\"><img src=\"images/LLLogoSmall.jpg\" alt=\"Lauren's List Logo\" /></a>");
             out.println("<h1> Lauren's List </h1>");
             out.println("</div>");
             out.println("<div class=\"right\" style=\"display:inline-block\">");
@@ -122,9 +122,9 @@ public class search extends HttpServlet {
             out.println("</div>");
             out.println("<div id=\"top\" class=\"pure-menu-horizontal pure-menu pure-menu-open\">");
             out.println("<ul>");
-            out.println("<li><a href=\"index.jsp\">Home</a></li>");
+            out.println("<li><a href=\"homePage\">Home</a></li>");
             out.println("<li><a href=\"#\">Browse Contractors</a></li>");
-            out.println("<li><a href=\"about.html\">About</a></li>");
+            out.println("<li><a href=\"about\">About</a></li>");
             out.println("</ul>");
             out.println("</div>");
             out.println("<div id=\"center\">");
