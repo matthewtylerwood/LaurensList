@@ -125,15 +125,15 @@ public class changePassword extends HttpServlet {
             out.println("<legend> Change Passsword </legend>");
             out.println("<div class=\"pure-control-group\">");
             out.println("<label for=\"password\">Password</label>");
-            out.println("<input name=\"password\" type=\"password\" />");
+            out.println("<input name=\"password\" type=\"password\" required= />");
             out.println("</div>");
             out.println("<div class=\"pure-control-group\">");
             out.println("<label for=\"passwordNew\">New Password</label>");
-            out.println("<input name=\"passwordNew\" type=\"password\" />");
+            out.println("<input name=\"passwordNew\" type=\"password\" required= />");
             out.println("</div>");
             out.println("<div class=\"pure-control-group\">");
             out.println("<label for=\"passwordNewConfirm\">Confirm New Password</label>");
-            out.println("<input name=\"passwordNewConfirm\" type=\"password\" />");
+            out.println("<input name=\"passwordNewConfirm\" type=\"password\" required= />");
             out.println("</div>");
             out.println("<div class=\"pure-controls\">");
             out.println("<button type=\"submit\" class=\"pure-button pure-button-primary\">Submit</button> &nbsp;");
