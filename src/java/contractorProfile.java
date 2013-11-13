@@ -170,7 +170,208 @@ public class contractorProfile extends HttpServlet {
             out.println("<div class=\"pure-u-1-4\">");
             out.println("<fieldset>");
             out.println("<legend> Overall Rating </legend>");
-            out.println("<p>Thirds</p>");
+            out.println("<p>");
+            
+            out.println("<article>");
+            out.println("<div class=\"star-rating\">");
+            
+            ResultSet ratingResult = null;
+            Statement statement3 = null;
+            try{
+                statement3 = conn.createStatement();
+                ratingResult = statement3.executeQuery("SELECT * FROM Rating WHERE email=\'" + email + "\'");
+                boolean ratingFound = ratingResult.next();
+                float rating = 0;
+                int numRatings = 0;
+                if(ratingFound){
+                    rating = ratingResult.getFloat("rating");
+                    numRatings = ratingResult.getInt("num_ratings");
+                }
+                float averageRating = Math.round(rating * 2) / 2.0f;
+                
+                if(averageRating == 0){
+                    out.println("<input class=\"rb0\" id=\"Ans_1\" name=\"numericRating\" type=\"radio\" value=\"0\" checked=\"checked\" />");
+                    out.println("<input class=\"rb1\" id=\"Ans_2\" name=\"numericRating\" type=\"radio\" value=\"0.5\" disabled=\"disabled\" />");
+                    out.println("<input class=\"rb2\" id=\"Ans_3\" name=\"numericRating\" type=\"radio\" value=\"1\" disabled=\"disabled\" />");
+                    out.println("<input class=\"rb3\" id=\"Ans_4\" name=\"numericRating\" type=\"radio\" value=\"1.5\" disabled=\"disabled\" />");
+                    out.println("<input class=\"rb4\" id=\"Ans_5\" name=\"numericRating\" type=\"radio\" value=\"2\" disabled=\"disabled\" />");
+                    out.println("<input class=\"rb5\" id=\"Ans_6\" name=\"numericRating\" type=\"radio\" value=\"2.5\" disabled=\"disabled\" />");
+                    out.println("<input class=\"rb6\" id=\"Ans_7\" name=\"numericRating\" type=\"radio\" value=\"3\" disabled=\"disabled\" />");
+                    out.println("<input class=\"rb7\" id=\"Ans_8\" name=\"numericRating\" type=\"radio\" value=\"3.5\" disabled=\"disabled\" />");
+                    out.println("<input class=\"rb8\" id=\"Ans_9\" name=\"numericRating\" type=\"radio\" value=\"4\" disabled=\"disabled\" />");
+                    out.println("<input class=\"rb9\" id=\"Ans_10\" name=\"numericRating\" type=\"radio\" value=\"4.5\" disabled=\"disabled\" />");
+                    out.println("<input class=\"rb10\" id=\"Ans_11\" name=\"numericRating\" type=\"radio\" value=\"5\" disabled=\"disabled\" />");
+                }
+                else if(averageRating == 0.5){
+                    out.println("<input class=\"rb0\" id=\"Ans_1\" name=\"numericRating\" type=\"radio\" value=\"0\" disabled=\"disabled\" />");
+                    out.println("<input class=\"rb1\" id=\"Ans_2\" name=\"numericRating\" type=\"radio\" value=\"0.5\" checked=\"checked\" />");
+                    out.println("<input class=\"rb2\" id=\"Ans_3\" name=\"numericRating\" type=\"radio\" value=\"1\" disabled=\"disabled\" />");
+                    out.println("<input class=\"rb3\" id=\"Ans_4\" name=\"numericRating\" type=\"radio\" value=\"1.5\" disabled=\"disabled\" />");
+                    out.println("<input class=\"rb4\" id=\"Ans_5\" name=\"numericRating\" type=\"radio\" value=\"2\" disabled=\"disabled\" />");
+                    out.println("<input class=\"rb5\" id=\"Ans_6\" name=\"numericRating\" type=\"radio\" value=\"2.5\" disabled=\"disabled\" />");
+                    out.println("<input class=\"rb6\" id=\"Ans_7\" name=\"numericRating\" type=\"radio\" value=\"3\" disabled=\"disabled\" />");
+                    out.println("<input class=\"rb7\" id=\"Ans_8\" name=\"numericRating\" type=\"radio\" value=\"3.5\" disabled=\"disabled\" />");
+                    out.println("<input class=\"rb8\" id=\"Ans_9\" name=\"numericRating\" type=\"radio\" value=\"4\" disabled=\"disabled\" />");
+                    out.println("<input class=\"rb9\" id=\"Ans_10\" name=\"numericRating\" type=\"radio\" value=\"4.5\" disabled=\"disabled\" />");
+                    out.println("<input class=\"rb10\" id=\"Ans_11\" name=\"numericRating\" type=\"radio\" value=\"5\" disabled=\"disabled\" />");
+                }
+                else if(averageRating == 1){
+                    out.println("<input class=\"rb0\" id=\"Ans_1\" name=\"numericRating\" type=\"radio\" value=\"0\" disabled=\"disabled\" />");
+                    out.println("<input class=\"rb1\" id=\"Ans_2\" name=\"numericRating\" type=\"radio\" value=\"0.5\" disabled=\"disabled\" />");
+                    out.println("<input class=\"rb2\" id=\"Ans_3\" name=\"numericRating\" type=\"radio\" value=\"1\" checked=\"checked\" />");
+                    out.println("<input class=\"rb3\" id=\"Ans_4\" name=\"numericRating\" type=\"radio\" value=\"1.5\" disabled=\"disabled\" />");
+                    out.println("<input class=\"rb4\" id=\"Ans_5\" name=\"numericRating\" type=\"radio\" value=\"2\" disabled=\"disabled\" />");
+                    out.println("<input class=\"rb5\" id=\"Ans_6\" name=\"numericRating\" type=\"radio\" value=\"2.5\" disabled=\"disabled\" />");
+                    out.println("<input class=\"rb6\" id=\"Ans_7\" name=\"numericRating\" type=\"radio\" value=\"3\" disabled=\"disabled\" />");
+                    out.println("<input class=\"rb7\" id=\"Ans_8\" name=\"numericRating\" type=\"radio\" value=\"3.5\" disabled=\"disabled\" />");
+                    out.println("<input class=\"rb8\" id=\"Ans_9\" name=\"numericRating\" type=\"radio\" value=\"4\" disabled=\"disabled\" />");
+                    out.println("<input class=\"rb9\" id=\"Ans_10\" name=\"numericRating\" type=\"radio\" value=\"4.5\" disabled=\"disabled\" />");
+                    out.println("<input class=\"rb10\" id=\"Ans_11\" name=\"numericRating\" type=\"radio\" value=\"5\" disabled=\"disabled\" />");
+                }
+                else if(averageRating == 1.5){
+                    out.println("<input class=\"rb0\" id=\"Ans_1\" name=\"numericRating\" type=\"radio\" value=\"0\" disabled=\"disabled\" />");
+                    out.println("<input class=\"rb1\" id=\"Ans_2\" name=\"numericRating\" type=\"radio\" value=\"0.5\" disabled=\"disabled\" />");
+                    out.println("<input class=\"rb2\" id=\"Ans_3\" name=\"numericRating\" type=\"radio\" value=\"1\" disabled=\"disabled\" />");
+                    out.println("<input class=\"rb3\" id=\"Ans_4\" name=\"numericRating\" type=\"radio\" value=\"1.5\" checked=\"checked\" />");
+                    out.println("<input class=\"rb4\" id=\"Ans_5\" name=\"numericRating\" type=\"radio\" value=\"2\" disabled=\"disabled\" />");
+                    out.println("<input class=\"rb5\" id=\"Ans_6\" name=\"numericRating\" type=\"radio\" value=\"2.5\" disabled=\"disabled\" />");
+                    out.println("<input class=\"rb6\" id=\"Ans_7\" name=\"numericRating\" type=\"radio\" value=\"3\" disabled=\"disabled\" />");
+                    out.println("<input class=\"rb7\" id=\"Ans_8\" name=\"numericRating\" type=\"radio\" value=\"3.5\" disabled=\"disabled\" />");
+                    out.println("<input class=\"rb8\" id=\"Ans_9\" name=\"numericRating\" type=\"radio\" value=\"4\" disabled=\"disabled\" />");
+                    out.println("<input class=\"rb9\" id=\"Ans_10\" name=\"numericRating\" type=\"radio\" value=\"4.5\" disabled=\"disabled\" />");
+                    out.println("<input class=\"rb10\" id=\"Ans_11\" name=\"numericRating\" type=\"radio\" value=\"5\" disabled=\"disabled\" />");
+                }
+                else if(averageRating == 2){
+                    out.println("<input class=\"rb0\" id=\"Ans_1\" name=\"numericRating\" type=\"radio\" value=\"0\" disabled=\"disabled\" />");
+                    out.println("<input class=\"rb1\" id=\"Ans_2\" name=\"numericRating\" type=\"radio\" value=\"0.5\" disabled=\"disabled\" />");
+                    out.println("<input class=\"rb2\" id=\"Ans_3\" name=\"numericRating\" type=\"radio\" value=\"1\" disabled=\"disabled\" />");
+                    out.println("<input class=\"rb3\" id=\"Ans_4\" name=\"numericRating\" type=\"radio\" value=\"1.5\" disabled=\"disabled\" />");
+                    out.println("<input class=\"rb4\" id=\"Ans_5\" name=\"numericRating\" type=\"radio\" value=\"2\" checked=\"checked\" />");
+                    out.println("<input class=\"rb5\" id=\"Ans_6\" name=\"numericRating\" type=\"radio\" value=\"2.5\" disabled=\"disabled\" />");
+                    out.println("<input class=\"rb6\" id=\"Ans_7\" name=\"numericRating\" type=\"radio\" value=\"3\" disabled=\"disabled\" />");
+                    out.println("<input class=\"rb7\" id=\"Ans_8\" name=\"numericRating\" type=\"radio\" value=\"3.5\" disabled=\"disabled\" />");
+                    out.println("<input class=\"rb8\" id=\"Ans_9\" name=\"numericRating\" type=\"radio\" value=\"4\" disabled=\"disabled\" />");
+                    out.println("<input class=\"rb9\" id=\"Ans_10\" name=\"numericRating\" type=\"radio\" value=\"4.5\" disabled=\"disabled\" />");
+                    out.println("<input class=\"rb10\" id=\"Ans_11\" name=\"numericRating\" type=\"radio\" value=\"5\" disabled=\"disabled\" />");
+                }
+                else if(averageRating == 2.5){
+                    out.println("<input class=\"rb0\" id=\"Ans_1\" name=\"numericRating\" type=\"radio\" value=\"0\" disabled=\"disabled\" />");
+                    out.println("<input class=\"rb1\" id=\"Ans_2\" name=\"numericRating\" type=\"radio\" value=\"0.5\" disabled=\"disabled\" />");
+                    out.println("<input class=\"rb2\" id=\"Ans_3\" name=\"numericRating\" type=\"radio\" value=\"1\" disabled=\"disabled\" />");
+                    out.println("<input class=\"rb3\" id=\"Ans_4\" name=\"numericRating\" type=\"radio\" value=\"1.5\" disabled=\"disabled\" />");
+                    out.println("<input class=\"rb4\" id=\"Ans_5\" name=\"numericRating\" type=\"radio\" value=\"2\" disabled=\"disabled\" />");
+                    out.println("<input class=\"rb5\" id=\"Ans_6\" name=\"numericRating\" type=\"radio\" value=\"2.5\" checked=\"checked\" />");
+                    out.println("<input class=\"rb6\" id=\"Ans_7\" name=\"numericRating\" type=\"radio\" value=\"3\" disabled=\"disabled\" />");
+                    out.println("<input class=\"rb7\" id=\"Ans_8\" name=\"numericRating\" type=\"radio\" value=\"3.5\" disabled=\"disabled\" />");
+                    out.println("<input class=\"rb8\" id=\"Ans_9\" name=\"numericRating\" type=\"radio\" value=\"4\" disabled=\"disabled\" />");
+                    out.println("<input class=\"rb9\" id=\"Ans_10\" name=\"numericRating\" type=\"radio\" value=\"4.5\" disabled=\"disabled\" />");
+                    out.println("<input class=\"rb10\" id=\"Ans_11\" name=\"numericRating\" type=\"radio\" value=\"5\" disabled=\"disabled\" />");
+                }
+                else if(averageRating == 3){
+                    out.println("<input class=\"rb0\" id=\"Ans_1\" name=\"numericRating\" type=\"radio\" value=\"0\" disabled=\"disabled\" />");
+                    out.println("<input class=\"rb1\" id=\"Ans_2\" name=\"numericRating\" type=\"radio\" value=\"0.5\" disabled=\"disabled\" />");
+                    out.println("<input class=\"rb2\" id=\"Ans_3\" name=\"numericRating\" type=\"radio\" value=\"1\" disabled=\"disabled\" />");
+                    out.println("<input class=\"rb3\" id=\"Ans_4\" name=\"numericRating\" type=\"radio\" value=\"1.5\" disabled=\"disabled\" />");
+                    out.println("<input class=\"rb4\" id=\"Ans_5\" name=\"numericRating\" type=\"radio\" value=\"2\" disabled=\"disabled\" />");
+                    out.println("<input class=\"rb5\" id=\"Ans_6\" name=\"numericRating\" type=\"radio\" value=\"2.5\" disabled=\"disabled\" />");
+                    out.println("<input class=\"rb6\" id=\"Ans_7\" name=\"numericRating\" type=\"radio\" value=\"3\" checked=\"checked\" />");
+                    out.println("<input class=\"rb7\" id=\"Ans_8\" name=\"numericRating\" type=\"radio\" value=\"3.5\" disabled=\"disabled\" />");
+                    out.println("<input class=\"rb8\" id=\"Ans_9\" name=\"numericRating\" type=\"radio\" value=\"4\" disabled=\"disabled\" />");
+                    out.println("<input class=\"rb9\" id=\"Ans_10\" name=\"numericRating\" type=\"radio\" value=\"4.5\" disabled=\"disabled\" />");
+                    out.println("<input class=\"rb10\" id=\"Ans_11\" name=\"numericRating\" type=\"radio\" value=\"5\" disabled=\"disabled\" />");
+                }
+                else if(averageRating == 3.5){
+                    out.println("<input class=\"rb0\" id=\"Ans_1\" name=\"numericRating\" type=\"radio\" value=\"0\" disabled=\"disabled\" />");
+                    out.println("<input class=\"rb1\" id=\"Ans_2\" name=\"numericRating\" type=\"radio\" value=\"0.5\" disabled=\"disabled\" />");
+                    out.println("<input class=\"rb2\" id=\"Ans_3\" name=\"numericRating\" type=\"radio\" value=\"1\" disabled=\"disabled\" />");
+                    out.println("<input class=\"rb3\" id=\"Ans_4\" name=\"numericRating\" type=\"radio\" value=\"1.5\" disabled=\"disabled\" />");
+                    out.println("<input class=\"rb4\" id=\"Ans_5\" name=\"numericRating\" type=\"radio\" value=\"2\" disabled=\"disabled\" />");
+                    out.println("<input class=\"rb5\" id=\"Ans_6\" name=\"numericRating\" type=\"radio\" value=\"2.5\" disabled=\"disabled\" />");
+                    out.println("<input class=\"rb6\" id=\"Ans_7\" name=\"numericRating\" type=\"radio\" value=\"3\" disabled=\"disabled\" />");
+                    out.println("<input class=\"rb7\" id=\"Ans_8\" name=\"numericRating\" type=\"radio\" value=\"3.5\" checked=\"checked\" />");
+                    out.println("<input class=\"rb8\" id=\"Ans_9\" name=\"numericRating\" type=\"radio\" value=\"4\" disabled=\"disabled\" />");
+                    out.println("<input class=\"rb9\" id=\"Ans_10\" name=\"numericRating\" type=\"radio\" value=\"4.5\" disabled=\"disabled\" />");
+                    out.println("<input class=\"rb10\" id=\"Ans_11\" name=\"numericRating\" type=\"radio\" value=\"5\" disabled=\"disabled\" />");
+                }
+                else if(averageRating == 4){
+                    out.println("<input class=\"rb0\" id=\"Ans_1\" name=\"numericRating\" type=\"radio\" value=\"0\" disabled=\"disabled\" />");
+                    out.println("<input class=\"rb1\" id=\"Ans_2\" name=\"numericRating\" type=\"radio\" value=\"0.5\" disabled=\"disabled\" />");
+                    out.println("<input class=\"rb2\" id=\"Ans_3\" name=\"numericRating\" type=\"radio\" value=\"1\" disabled=\"disabled\" />");
+                    out.println("<input class=\"rb3\" id=\"Ans_4\" name=\"numericRating\" type=\"radio\" value=\"1.5\" disabled=\"disabled\" />");
+                    out.println("<input class=\"rb4\" id=\"Ans_5\" name=\"numericRating\" type=\"radio\" value=\"2\" disabled=\"disabled\" />");
+                    out.println("<input class=\"rb5\" id=\"Ans_6\" name=\"numericRating\" type=\"radio\" value=\"2.5\" disabled=\"disabled\" />");
+                    out.println("<input class=\"rb6\" id=\"Ans_7\" name=\"numericRating\" type=\"radio\" value=\"3\" disabled=\"disabled\" />");
+                    out.println("<input class=\"rb7\" id=\"Ans_8\" name=\"numericRating\" type=\"radio\" value=\"3.5\" disabled=\"disabled\" />");
+                    out.println("<input class=\"rb8\" id=\"Ans_9\" name=\"numericRating\" type=\"radio\" value=\"4\" checked=\"checked\" />");
+                    out.println("<input class=\"rb9\" id=\"Ans_10\" name=\"numericRating\" type=\"radio\" value=\"4.5\" disabled=\"disabled\" />");
+                    out.println("<input class=\"rb10\" id=\"Ans_11\" name=\"numericRating\" type=\"radio\" value=\"5\" disabled=\"disabled\" />");
+                }
+                else if(averageRating == 4.5){
+                    out.println("<input class=\"rb0\" id=\"Ans_1\" name=\"numericRating\" type=\"radio\" value=\"0\" disabled=\"disabled\" />");
+                    out.println("<input class=\"rb1\" id=\"Ans_2\" name=\"numericRating\" type=\"radio\" value=\"0.5\" disabled=\"disabled\" />");
+                    out.println("<input class=\"rb2\" id=\"Ans_3\" name=\"numericRating\" type=\"radio\" value=\"1\" disabled=\"disabled\" />");
+                    out.println("<input class=\"rb3\" id=\"Ans_4\" name=\"numericRating\" type=\"radio\" value=\"1.5\" disabled=\"disabled\" />");
+                    out.println("<input class=\"rb4\" id=\"Ans_5\" name=\"numericRating\" type=\"radio\" value=\"2\" disabled=\"disabled\" />");
+                    out.println("<input class=\"rb5\" id=\"Ans_6\" name=\"numericRating\" type=\"radio\" value=\"2.5\" disabled=\"disabled\" />");
+                    out.println("<input class=\"rb6\" id=\"Ans_7\" name=\"numericRating\" type=\"radio\" value=\"3\" disabled=\"disabled\" />");
+                    out.println("<input class=\"rb7\" id=\"Ans_8\" name=\"numericRating\" type=\"radio\" value=\"3.5\" disabled=\"disabled\" />");
+                    out.println("<input class=\"rb8\" id=\"Ans_9\" name=\"numericRating\" type=\"radio\" value=\"4\" disabled=\"disabled\" />");
+                    out.println("<input class=\"rb9\" id=\"Ans_10\" name=\"numericRating\" type=\"radio\" value=\"4.5\" checked=\"checked\" />");
+                    out.println("<input class=\"rb10\" id=\"Ans_11\" name=\"numericRating\" type=\"radio\" value=\"5\" disabled=\"disabled\" />");
+                }
+                else if(averageRating == 5){
+                    out.println("<input class=\"rb0\" id=\"Ans_1\" name=\"numericRating\" type=\"radio\" value=\"0\" disabled=\"disabled\" />");
+                    out.println("<input class=\"rb1\" id=\"Ans_2\" name=\"numericRating\" type=\"radio\" value=\"0.5\" disabled=\"disabled\" />");
+                    out.println("<input class=\"rb2\" id=\"Ans_3\" name=\"numericRating\" type=\"radio\" value=\"1\" disabled=\"disabled\" />");
+                    out.println("<input class=\"rb3\" id=\"Ans_4\" name=\"numericRating\" type=\"radio\" value=\"1.5\" disabled=\"disabled\" />");
+                    out.println("<input class=\"rb4\" id=\"Ans_5\" name=\"numericRating\" type=\"radio\" value=\"2\" disabled=\"disabled\" />");
+                    out.println("<input class=\"rb5\" id=\"Ans_6\" name=\"numericRating\" type=\"radio\" value=\"2.5\" disabled=\"disabled\" />");
+                    out.println("<input class=\"rb6\" id=\"Ans_7\" name=\"numericRating\" type=\"radio\" value=\"3\" disabled=\"disabled\" />");
+                    out.println("<input class=\"rb7\" id=\"Ans_8\" name=\"numericRating\" type=\"radio\" value=\"3.5\" disabled=\"disabled\" />");
+                    out.println("<input class=\"rb8\" id=\"Ans_9\" name=\"numericRating\" type=\"radio\" value=\"4\" disabled=\"disabled\" />");
+                    out.println("<input class=\"rb9\" id=\"Ans_10\" name=\"numericRating\" type=\"radio\" value=\"4.5\" disabled=\"disabled\" />");
+                    out.println("<input class=\"rb10\" id=\"Ans_11\" name=\"numericRating\" type=\"radio\" value=\"5\" checked=\"checked\" />");
+                }
+                        
+                }catch(SQLException ex){
+                    out.println("SQLException in Query.java");
+                    ex.printStackTrace(out);
+                }finally
+                {
+                    DBUtilities.closeResultSet(ratingResult);
+                    DBUtilities.closeStatement(statement3);
+                }
+
+            out.println("<label for=\"Ans_1\" class=\"star rb0l\" onclick=\"\"></label>");
+            out.println("<label for=\"Ans_2\" class=\"star rb1l\" onclick=\"\"></label>");
+            out.println("<label for=\"Ans_3\" class=\"star rb2l\" onclick=\"\"></label>");
+            out.println("<label for=\"Ans_4\" class=\"star rb3l\" onclick=\"\"></label>");
+            out.println("<label for=\"Ans_5\" class=\"star rb4l\" onclick=\"\"></label>");
+            out.println("<label for=\"Ans_6\" class=\"star rb5l\" onclick=\"\"></label>");
+            out.println("<label for=\"Ans_7\" class=\"star rb6l\" onclick=\"\"></label>");
+            out.println("<label for=\"Ans_8\" class=\"star rb7l\" onclick=\"\"></label>");
+            out.println("<label for=\"Ans_9\" class=\"star rb8l\" onclick=\"\"></label>");
+            
+            out.println("<label for=\"Ans_10\" class=\"star rb9l\" onclick=\"\"></label>");
+            out.println("<label for=\"Ans_11\" class=\"star rb10l last\" onclick=\"\"></label>");
+            out.println("<label for=\"Ans_1\" class=\"rb\" onclick=\"\">0</label>");
+            out.println("<label for=\"Ans_2\" class=\"rb\" onclick=\"\">1</label>");
+            out.println("<label for=\"Ans_3\" class=\"rb\" onclick=\"\">2</label>");
+            out.println("<label for=\"Ans_4\" class=\"rb\" onclick=\"\">3</label>");
+            out.println("<label for=\"Ans_5\" class=\"rb\" onclick=\"\">4</label>");
+            out.println("<label for=\"Ans_6\" class=\"rb\" onclick=\"\">5</label>");
+            out.println("<label for=\"Ans_7\" class=\"rb\" onclick=\"\">6</label>");
+            out.println("<label for=\"Ans_8\" class=\"rb\" onclick=\"\">7</label>");
+            out.println("<label for=\"Ans_9\" class=\"rb\" onclick=\"\">8</label>");
+            out.println("<label for=\"Ans_10\" class=\"rb\" onclick=\"\">9</label>");
+            out.println("<label for=\"Ans_11\" class=\"rb\" onclick=\"\">10</label>");
+            
+            out.println("<div class=\"rating\"></div>");
+            out.println("<div class=\"rating-bg\"></div> ");
+            out.println("</div> <!-- star-rating -->");
+            out.println("</article>");
+            
+            out.println("</p>");
             out.println("</fieldset>");
             out.println("</div>");
             out.println("</div>");
