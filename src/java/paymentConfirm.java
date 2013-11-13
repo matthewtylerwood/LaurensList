@@ -59,7 +59,12 @@ public class paymentConfirm extends HttpServlet {
             String cityPay = request.getParameter("cityPay");
             String statePay = request.getParameter("statePay");
             String zipPay = request.getParameter("zipPay");
+            String creditCardPay = request.getParameter("creditCardPay");
+            String securityPay = request.getParameter("securityPay");
+            String experationPay = request.getParameter("experationPay");
            
+            boolean isValid = CardValidator.isValid(creditCardPay);
+            
             out.println("<?xml version = \"1.0\" encoding = \"utf-8\" ?>");
             out.println("<!DOCTYPE html PUBLIC \"-//W3C//DTD XHTML 1.0 Strict//EN\"");
             out.println("\"http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd\">");
