@@ -134,11 +134,9 @@ public class search extends HttpServlet {
             out.println("<legend> Search Results </legend>");
             while(result.next())
             {
-                
-                
-                out.println( result.getString("company"));
+                out.println("<a href=\"contractorPage?email=" + result.getString("email") + "\">" + result.getString("company") + "</a>");
                 out.println("<br/>");
-                out.println( result.getString("info"));
+                out.println(result.getString("info"));
                 out.println("<br/>");
                 out.println("<hr/>");
             }
