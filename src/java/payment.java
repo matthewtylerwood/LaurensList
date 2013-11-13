@@ -206,7 +206,7 @@ public class payment extends HttpServlet {
             out.println("<option value=\"06\">Jun</option>");
             out.println("<option value=\"07\">Jul</option>");
             out.println("<option value=\"08\">Aug</option>");
-            out.println("<option value=\"09\">Sep Of Columbia</option>");
+            out.println("<option value=\"09\">Sep</option>");
             out.println("<option value=\"10\">Oct</option>");
             out.println("<option value=\"11\">Nov</option>");
             out.println("<option value=\"12\">Dec</option>");

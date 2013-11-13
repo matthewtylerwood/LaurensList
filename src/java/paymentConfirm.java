@@ -117,8 +117,7 @@ public class paymentConfirm extends HttpServlet {
             out.println("<legend> Payment Information </legend>");
 
             if(isValid)out.println("<p> Credit Card is Valid </p>");
-            else out.println("<p> Credit Card is InValid</p>");
-            
+            else out.println("<p> Credit Card is InValid</p>");            
             
             out.println("</fieldset>");
             out.println("</div>");
