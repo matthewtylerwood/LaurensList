@@ -61,7 +61,7 @@ public class paymentConfirm extends HttpServlet {
             String zipPay = request.getParameter("zipPay");
             String creditCardPay = request.getParameter("creditCardPay");
             String securityPay = request.getParameter("securityPay");
-            String experationPay = request.getParameter("experationPay");
+            String expirationPay = request.getParameter("expirationPay");
            
             boolean isValid = CardValidator.isValid(creditCardPay);
             
