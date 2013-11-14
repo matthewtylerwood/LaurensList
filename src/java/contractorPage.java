@@ -154,7 +154,7 @@ public class contractorPage extends HttpServlet {
                     paymentResult = statement5.executeQuery("SELECT * FROM Payment WHERE customer_email=\'" + customerEmailCurrent + "\' AND contractor_email=\'" + email + "\' AND reviewed=0");
                     boolean paymentFound = paymentResult.next();
                     if(paymentFound){
-                        out.println("<a class=\"pure-button\" href=\"#\"> Rate Contractor </a> &nbsp;<br/><br/>");
+                        out.println("<a class=\"pure-button\" href=\"rateContractor?email=" + email + "\"> Rate Contractor </a> &nbsp;<br/><br/>");
                     }
                     else{
                         out.println("<a class=\"pure-button pure-button-disabled\" href=\"#\"> Rate Contractor </a> &nbsp;<br/><br/>");
@@ -193,14 +193,14 @@ public class contractorPage extends HttpServlet {
                     phone = contractorResult.getString("phone");
                 }
                 out.println("<p>" + contractorCompany + "<br />" + email + "<br />" + phone + "</p>");
-                }catch(SQLException ex){
-                    out.println("SQLException in Query.java");
-                    ex.printStackTrace(out);
-                }finally
-                {
-                    DBUtilities.closeResultSet(contractorResult);
-                    DBUtilities.closeStatement(statement4);
-                }
+            }catch(SQLException ex){
+                out.println("SQLException in Query.java");
+                ex.printStackTrace(out);
+            }finally
+            {
+                DBUtilities.closeResultSet(contractorResult);
+                DBUtilities.closeStatement(statement4);
+            }
             
             out.println("</fieldset>");
             out.println("</div>");
@@ -264,10 +264,9 @@ public class contractorPage extends HttpServlet {
                 ratingResult = statement3.executeQuery("SELECT * FROM Rating WHERE email=\'" + email + "\'");
                 boolean ratingFound = ratingResult.next();
                 float rating = 0;
-                int numRatings = 0;
+                
                 if(ratingFound){
                     rating = ratingResult.getFloat("rating");
-                    numRatings = ratingResult.getInt("num_ratings");
                 }
                 float averageRating = Math.round(rating * 2) / 2.0f;
                 
@@ -433,9 +432,9 @@ public class contractorPage extends HttpServlet {
             out.println("<label for=\"Ans_7\" class=\"star rb6l\" onclick=\"\"></label>");
             out.println("<label for=\"Ans_8\" class=\"star rb7l\" onclick=\"\"></label>");
             out.println("<label for=\"Ans_9\" class=\"star rb8l\" onclick=\"\"></label>");
-            
             out.println("<label for=\"Ans_10\" class=\"star rb9l\" onclick=\"\"></label>");
             out.println("<label for=\"Ans_11\" class=\"star rb10l last\" onclick=\"\"></label>");
+            
             out.println("<label for=\"Ans_1\" class=\"rb\" onclick=\"\">0</label>");
             out.println("<label for=\"Ans_2\" class=\"rb\" onclick=\"\">1</label>");
             out.println("<label for=\"Ans_3\" class=\"rb\" onclick=\"\">2</label>");

@@ -78,90 +78,62 @@ public class paymentConfirm extends HttpServlet {
             String contractorEmail = request.getParameter("contractorEmail");
            
             boolean isValid = CardValidator.isValid(creditCardPay);
-            
-            out.println("<?xml version = \"1.0\" encoding = \"utf-8\" ?>");
-            out.println("<!DOCTYPE html PUBLIC \"-//W3C//DTD XHTML 1.0 Strict//EN\"");
-            out.println("\"http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd\">");
-            out.println("<!--");
-            out.println("Search Results for Lauren's List Web Site");
-            out.println("-->");
-            out.println("<html xmlns=\"http://www.w3.org/1999/xhtml\">");
-            out.println("<head>");
-            out.println("<meta http-equiv=\"Content-Type\" content=\"text/html; charset=utf-8\" />");
-            out.println("<title> Search Results </title>");
-            out.println("<link rel=\"stylesheet\" href=\"http://yui.yahooapis.com/pure/0.3.0/pure-nr-min.css\" />");
-            out.println("<link rel=\"stylesheet\" href=\"style.css\" />");
-            out.println("</head>");
-            out.println("<body class=\"pure-skin-matt\">");
-            out.println("<div id=\"header\">");
-            out.println("<div class=\"bottom_header\">");
-            out.println("<a href=\"homePage\"><img src=\"images/LLLogoSmall.jpg\" alt=\"Lauren's List Logo\" /></a>");
-            out.println("<h1> Lauren's List </h1>");
-            out.println("</div>");
-            out.println("<div class=\"right\" style=\"display:inline-block\">");
-            out.println("<br/>");
-
-            if (userType.equals("Guest")) {
-                out.println("<a class=\"pure-button\" href=\"login.html\"> Login </a> &nbsp;");
-                out.println("<a class=\"pure-button\" href=\"customerOrContractor.html\"> Create Account </a> &nbsp;");
-            } else if (userType.equals("contractor")) {
-                out.println("<a class=\"pure-button\" href=\"contractorProfile\"> " + company + " </a> &nbsp;");
-                out.println("<a class=\"pure-button\" href=\"logout\"> Logout </a> &nbsp;<br/><br/>");
-            } else if (userType.equals("customer")) {
-                out.println("<a class=\"pure-button\" href=\"changePassword\"> " + firstName + " " + lastName + " </a> &nbsp;");
-                out.println("<a class=\"pure-button\" href=\"logout\"> Logout </a> &nbsp;<br/><br/>");
-            } else if (userType.equals("admin")) {
-                out.println("<a class=\"pure-button\" href=\"changePassword\"> " + adminEmail + " </a> &nbsp;");
-                out.println("<a class=\"pure-button\" href=\"logout\"> Logout </a> &nbsp;<br/><br/>");
-            }
-
-            out.println("</div>");
-            out.println("</div>");
-            out.println("<div id=\"top\" class=\"pure-menu-horizontal pure-menu pure-menu-open\">");
-            out.println("<ul>");
-            out.println("<li><a href=\"homePage\">Home</a></li>");
-            out.println("<li><a href=\"search?search=\">Browse Contractors</a></li>");
-            out.println("<li><a href=\"about\">About</a></li>");
-            out.println("</ul>");
-            out.println("</div>");
-            out.println("<div id=\"center\">");
-            out.println("<form action=\"paymentConfirm\" method=\"post\" class=\"pure-form pure-form-aligned\">");
-            out.println("<div class=\"center\">");
-            out.println("<fieldset>");
-            out.println("<legend> Payment Information </legend>");
 
             if(isValid){
+                
                 try{
-                    String statString = "INSERT INTO Payment (`customer_email`, `contractor_email`, `reviewed`) VALUES (?, ?, ?)";
-                        stat = conn.prepareStatement(statString);
-                        stat.setString(1, email);
-                        stat.setString(2, contractorEmail);
-                        stat.setInt(3, 0);
-                        stat.executeUpdate();
-                    }catch(SQLException ex){
-                        out.println("SQLException in Query.java");
-                        ex.printStackTrace(out);
-                    }finally
-                    {
-                        DBUtilities.closeResultSet(paymentResult);
-                        DBUtilities.closeStatement(statement);
-                        dataSource.freeConnection(conn);
+                    statement = conn.createStatement();
+                    paymentResult = statement.executeQuery("SELECT * FROM Payment WHERE customer_email=\'" + email + "\' AND contractor_email=\'" + contractorEmail + "\'");
+                    boolean paymentFound = paymentResult.next();
+                    if(paymentFound){
+                        PreparedStatement stat2 = null;
+                        try{
+                            String statString2 = "UPDATE Payment SET reviewed=? WHERE customer_email=\'" + email + "\' AND contractor_email=\'" + contractorEmail + "\'";
+                            stat2 = conn.prepareStatement(statString2);
+                            stat2.setInt(1, 0);
+                            stat2.executeUpdate();
+                        }catch(SQLException ex){
+                            out.println("SQLException in Query.java");
+                            ex.printStackTrace(out);
+                        }finally
+                        {
+                            DBUtilities.closePreparedStatement(stat2);
+                        }
                     }
+                    else{
+                        try{
+                            String statString = "INSERT INTO Payment (`customer_email`, `contractor_email`, `reviewed`) VALUES (?, ?, ?)";
+                            stat = conn.prepareStatement(statString);
+                            stat.setString(1, email);
+                            stat.setString(2, contractorEmail);
+                            stat.setInt(3, 0);
+                            stat.executeUpdate();
+                        }catch(SQLException ex){
+                            out.println("SQLException in Query.java");
+                            ex.printStackTrace(out);
+                        }finally
+                        {
+                            DBUtilities.closePreparedStatement(stat);
+                        }
+                    }
+                    
+                }catch(SQLException ex){
+                    out.println("SQLException in Query.java");
+                    ex.printStackTrace(out);
+                }finally
+                {
+                    DBUtilities.closeResultSet(paymentResult);
+                    DBUtilities.closeStatement(statement);
+                    dataSource.freeConnection(conn);
+                    
+                }
+                               
                 response.sendRedirect("contractorPage?email=" + contractorEmail);
             }
             else{
                 response.sendRedirect("payment?email=" + contractorEmail);
             }          
             
-            out.println("</fieldset>");
-            out.println("</div>");
-            out.println("</form>");
-            out.println("</div>");
-            out.println("</body>");
-            out.println("</html>");
-
-
-
         } catch (Exception ex) {
             ex.printStackTrace();
         } finally {

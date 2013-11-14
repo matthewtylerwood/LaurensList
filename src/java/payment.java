@@ -53,6 +53,9 @@ public class payment extends HttpServlet {
                     userType = "admin";
                 }
             }
+            else{
+                response.sendRedirect("homePage");
+            }
         }
         try {
             out.println("<?xml version = \"1.0\" encoding = \"utf-8\" ?>");

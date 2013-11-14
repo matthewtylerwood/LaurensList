@@ -182,10 +182,8 @@ public class contractorProfile extends HttpServlet {
                 ratingResult = statement3.executeQuery("SELECT * FROM Rating WHERE email=\'" + email + "\'");
                 boolean ratingFound = ratingResult.next();
                 float rating = 0;
-                int numRatings = 0;
                 if(ratingFound){
                     rating = ratingResult.getFloat("rating");
-                    numRatings = ratingResult.getInt("num_ratings");
                 }
                 float averageRating = Math.round(rating * 2) / 2.0f;
                 
