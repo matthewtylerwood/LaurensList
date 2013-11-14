@@ -38,6 +38,7 @@ public class contractorPage extends HttpServlet {
         String userType = "Guest";
         String firstName = "";
         String lastName = "";
+        String customerEmailCurrent = "";
         String company = "";
         String adminEmail = "";
         HttpSession httpSession;
@@ -51,6 +52,7 @@ public class contractorPage extends HttpServlet {
                     Customer customer = (Customer)httpSession.getAttribute("user");
                     firstName = customer.getFirstName();
                     lastName = customer.getLastName();
+                    customerEmailCurrent = customer.getEmail();
                     userType = "customer";
                 }
                 else if(httpSession.getAttribute("userType").equals("contractor"))
@@ -125,10 +127,6 @@ public class contractorPage extends HttpServlet {
             out.println("</div>");
             out.println("<div id=\"center\">");
             out.println("<div class=\"center\">");
-            out.println("<div class=\"pure-g\">");
-            out.println("<div class=\"pure-u-1-4\">");
-            out.println("<fieldset>");
-            out.println("<legend> Information </legend>");
             
             //email is recieved from GET method
             String email = "";
@@ -139,15 +137,57 @@ public class contractorPage extends HttpServlet {
                 response.sendRedirect("homePage");
             }
             
+            if(userType.equals("Guest")){
+                out.println("<a class=\"pure-button pure-button-disabled\" href=\"#\"> Pay Contractor </a> &nbsp;");
+                out.println("<a class=\"pure-button pure-button-disabled\" href=\"#\"> Rate Contractor </a> &nbsp;<br/><br/>");
+            }
+            else if(userType.equals("contractor")){
+                out.println("<a class=\"pure-button pure-button-disabled\" href=\"#\"> Pay Contractor </a> &nbsp;");
+                out.println("<a class=\"pure-button pure-button-disabled\" href=\"#\"> Rate Contractor </a> &nbsp;<br/><br/>");
+            }
+            else if(userType.equals("customer")){
+                out.println("<a class=\"pure-button\" href=\"payment?email=" + email + "\"> Pay Contractor </a> &nbsp;");
+                ResultSet paymentResult = null;
+                Statement statement5 = null;
+                try{
+                    statement5 = conn.createStatement();
+                    paymentResult = statement5.executeQuery("SELECT * FROM Payment WHERE customer_email=\'" + customerEmailCurrent + "\' AND contractor_email=\'" + email + "\' AND reviewed=0");
+                    boolean paymentFound = paymentResult.next();
+                    if(paymentFound){
+                        out.println("<a class=\"pure-button\" href=\"#\"> Rate Contractor </a> &nbsp;<br/><br/>");
+                    }
+                    else{
+                        out.println("<a class=\"pure-button pure-button-disabled\" href=\"#\"> Rate Contractor </a> &nbsp;<br/><br/>");
+                    }
+                    }catch(SQLException ex){
+                        out.println("SQLException in Query.java");
+                        ex.printStackTrace(out);
+                    }finally
+                    {
+                        DBUtilities.closeResultSet(paymentResult);
+                        DBUtilities.closeStatement(statement5);
+                    }
+                
+            }
+            else if(userType.equals("admin")){
+                out.println("<a class=\"pure-button pure-button-disabled\" href=\"#\"> Pay Contractor </a> &nbsp;");
+                out.println("<a class=\"pure-button pure-button-disabled\" href=\"#\"> Rate Contractor </a> &nbsp;<br/><br/>");
+            }
+            
+            out.println("<div class=\"pure-g\">");
+            out.println("<div class=\"pure-u-1-4\">");
+            out.println("<fieldset>");
+            out.println("<legend> Information </legend>");
+            
             ResultSet contractorResult = null;
             Statement statement4 = null;
             try{
                 statement4 = conn.createStatement();
                 contractorResult = statement4.executeQuery("SELECT * FROM Contractor WHERE email=\'" + email + "\'");
-                boolean customerFound = contractorResult.next();
+                boolean contractorFound = contractorResult.next();
                 String contractorCompany = "";
                 String phone = "";
-                if(customerFound){
+                if(contractorFound){
                     contractorCompany = contractorResult.getString("company");
                     email = contractorResult.getString("email");
                     phone = contractorResult.getString("phone");

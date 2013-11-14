@@ -212,6 +212,16 @@ public class payment extends HttpServlet {
             out.println("<option value=\"12\">12 - Dec</option>");
             out.println("</select>");
             out.println("</div>");
+            
+            String email = "";
+            if(request.getParameter("email") != null){
+                email = request.getParameter("email");
+            }
+            else{
+                response.sendRedirect("homePage");
+            }
+            out.println("<input name=\"contractorEmail\" type=\"hidden\" value=\"" + email + "\" /> ");
+            
             out.println("<div class=\"pure-controls\">");
             out.println("<button type=\"submit\" class=\"pure-button pure-button-primary\">Submit</button> &nbsp;");
             out.println("<button type=\"reset\" class=\"pure-button\">Reset</button>");

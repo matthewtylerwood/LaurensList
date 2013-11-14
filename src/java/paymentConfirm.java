@@ -5,7 +5,11 @@
 
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.sql.Connection;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.sql.Statement;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.servlet.ServletException;
@@ -28,6 +32,7 @@ public class paymentConfirm extends HttpServlet {
         String userType = "Guest";
         String firstName = "";
         String lastName = "";
+        String email = "";
         String company = "";
         String adminEmail = "";
         HttpSession httpSession;
@@ -39,6 +44,7 @@ public class paymentConfirm extends HttpServlet {
                     Customer customer = (Customer) httpSession.getAttribute("user");
                     firstName = customer.getFirstName();
                     lastName = customer.getLastName();
+                    email = customer.getEmail();
                     userType = "customer";
                 } else if (httpSession.getAttribute("userType").equals("contractor")) {
                     Contractor contractor = (Contractor) httpSession.getAttribute("user");
@@ -51,6 +57,13 @@ public class paymentConfirm extends HttpServlet {
                 }
             }
         }
+        
+        DBConnections dataSource = DBConnections.getInstance();
+        Connection conn = dataSource.getConnection();
+        Statement statement = null;
+        PreparedStatement stat = null;
+        ResultSet paymentResult = null;
+        
         try {
             String firstNamePay = request.getParameter("firstNamePay"); 
             String lastNamePay = request.getParameter("lastNamePay");
@@ -62,6 +75,7 @@ public class paymentConfirm extends HttpServlet {
             String creditCardPay = request.getParameter("creditCardPay");
             String securityPay = request.getParameter("securityPay");
             String expirationPay = request.getParameter("expirationPay");
+            String contractorEmail = request.getParameter("contractorEmail");
            
             boolean isValid = CardValidator.isValid(creditCardPay);
             
@@ -116,8 +130,28 @@ public class paymentConfirm extends HttpServlet {
             out.println("<fieldset>");
             out.println("<legend> Payment Information </legend>");
 
-            if(isValid)out.println("<p> Credit Card is Valid </p>");
-            else out.println("<p> Credit Card is InValid</p>");            
+            if(isValid){
+                try{
+                    String statString = "INSERT INTO Payment (`customer_email`, `contractor_email`, `reviewed`) VALUES (?, ?, ?)";
+                        stat = conn.prepareStatement(statString);
+                        stat.setString(1, email);
+                        stat.setString(2, contractorEmail);
+                        stat.setInt(3, 0);
+                        stat.executeUpdate();
+                    }catch(SQLException ex){
+                        out.println("SQLException in Query.java");
+                        ex.printStackTrace(out);
+                    }finally
+                    {
+                        DBUtilities.closeResultSet(paymentResult);
+                        DBUtilities.closeStatement(statement);
+                        dataSource.freeConnection(conn);
+                    }
+                response.sendRedirect("contractorPage?email=" + contractorEmail);
+            }
+            else{
+                response.sendRedirect("payment?email=" + contractorEmail);
+            }          
             
             out.println("</fieldset>");
             out.println("</div>");
