@@ -26,97 +26,42 @@ public class saveContractorProfile extends HttpServlet {
         Connection conn = dataSource.getConnection();
         PreparedStatement stat = null;
         Statement statement = null;
-        ResultSet passwordResult = null;
+        ResultSet getResult = null;
 
         HttpSession httpSession = request.getSession();
 
-        if(httpSession.getAttribute("userType").equals("customer"))
-        {
-            Customer customer = (Customer)httpSession.getAttribute("user");
-            String email = customer.getEmail();
-            try {
-                String oldPassword = request.getParameter("password");
-                String newPassword = request.getParameter("passwordNew");
-                String confirmNewPassword = request.getParameter("passwordNewConfirm");
-                
-                boolean passwordMatch = false;                
-                statement = conn.createStatement();
-                passwordResult = statement.executeQuery("SELECT * FROM Customer WHERE email=\'" + email + "\' AND password=MD5(\'" + oldPassword + "\')");
-                passwordMatch = passwordResult.next();
-                if (!passwordMatch) {
-                    response.sendRedirect("changePassword");
-                } else if (!newPassword.equals(confirmNewPassword)) {
-                    response.sendRedirect("changePassword");
-                } else if (newPassword.equals("") || confirmNewPassword.equals("")){
-                    response.sendRedirect("changePassword");
-                }
-                else 
-                {
-                    try {
-                        
-                        String statString = "UPDATE Customer SET password=MD5(?) WHERE email=\'" + email + "\'";
-                        stat = conn.prepareStatement(statString);
-                        stat.setString(1, newPassword);
-                        stat.executeUpdate();
-                                               
-                    } catch (SQLException ex) {
-                        out.println("SQLException in Query.java");
-                        ex.printStackTrace(out);
-                    } finally
-                    {
-                        DBUtilities.closeResultSet(passwordResult); 
-                    }
-
-                    response.sendRedirect("homePage");
-                }
-            } catch (Exception ex) {
-                ex.printStackTrace(out);
-            } finally {
-                out.close();
-                DBUtilities.closeStatement(stat);
-                DBUtilities.closeStatement(statement);
-                dataSource.freeConnection(conn);
-            }
-        }
-        else if(httpSession.getAttribute("userType").equals("contractor"))
+        if(httpSession.getAttribute("userType").equals("contractor"))
         {
             Contractor contractor = (Contractor)httpSession.getAttribute("user");
             String email = contractor.getEmail();
             try {
-                String oldPassword = request.getParameter("password");
-                String newPassword = request.getParameter("passwordNew");
-                String confirmNewPassword = request.getParameter("passwordNewConfirm");
+                String companyNew = request.getParameter("company");
+                String emailNew = request.getParameter("email");
+                String phoneNew = request.getParameter("phone");
+                String infoNew = request.getParameter("info");
                 
-                boolean passwordMatch = false;                
                 statement = conn.createStatement();
-                passwordResult = statement.executeQuery("SELECT * FROM Contractor WHERE email=\'" + email + "\' AND password=MD5(\'" + oldPassword + "\')");
-                passwordMatch = passwordResult.next();
-                if (!passwordMatch) {
-                    response.sendRedirect("changePassword");
-                } else if (!newPassword.equals(confirmNewPassword)) {
-                    response.sendRedirect("changePassword");
-                } else if (newPassword.equals("") || confirmNewPassword.equals("")){
-                    response.sendRedirect("changePassword");
-                }
-                else 
-                {
-                    try {
-                        
-                        String statString = "UPDATE Contractor SET password=MD5(?) WHERE email=\'" + email + "\'";
-                        stat = conn.prepareStatement(statString);
-                        stat.setString(1, newPassword);
-                        stat.executeUpdate();
-                                               
-                    } catch (SQLException ex) {
-                        out.println("SQLException in Query.java");
-                        ex.printStackTrace(out);
-                    } finally
-                    {
-                        DBUtilities.closeResultSet(passwordResult); 
-                    }
+                getResult = statement.executeQuery("SELECT * FROM Contractor WHERE email=\'" + email + "\' ");
+                try {
 
-                    response.sendRedirect("homePage"); //change to contractor page
+                    String statString = "UPDATE Contractor SET email=?, company=?"
+                    + ", phone=?, info=? WHERE email=\'" + email + "\'";
+                    stat = conn.prepareStatement(statString);
+                    stat.setString(0, emailNew);
+                    stat.setString(2, companyNew);
+                    stat.setString(3, phoneNew);
+                    stat.setString(4, infoNew);
+                    stat.executeUpdate();
+
+                } catch (SQLException ex) {
+                    out.println("SQLException in Query.java");
+                    ex.printStackTrace(out);
+                } finally
+                {
+                    DBUtilities.closeResultSet(getResult); 
                 }
+
+                response.sendRedirect("homePage"); //change to contractor page
             } catch (Exception ex) {
                 ex.printStackTrace(out);
             } finally {
@@ -126,54 +71,7 @@ public class saveContractorProfile extends HttpServlet {
                 dataSource.freeConnection(conn);
             }
         }
-        else if(httpSession.getAttribute("userType").equals("admin"))
-        {
-            Admin admin = (Admin)httpSession.getAttribute("user");
-            String email = admin.getEmail();
-            try {
-                String oldPassword = request.getParameter("password");
-                String newPassword = request.getParameter("passwordNew");
-                String confirmNewPassword = request.getParameter("passwordNewConfirm");
-                
-                boolean passwordMatch = false;                
-                statement = conn.createStatement();
-                passwordResult = statement.executeQuery("SELECT * FROM Admin WHERE email=\'" + email + "\' AND password=MD5(\'" + oldPassword + "\')");
-                passwordMatch = passwordResult.next();
-                if (!passwordMatch) {
-                    response.sendRedirect("changePassword");
-                } else if (!newPassword.equals(confirmNewPassword)) {
-                    response.sendRedirect("changePassword");
-                } else if (newPassword.equals("") || confirmNewPassword.equals("")){
-                    response.sendRedirect("changePassword");
-                }
-                else 
-                {
-                    try {
-                        
-                        String statString = "UPDATE Admin SET password=MD5(?) WHERE email=\'" + email + "\'";
-                        stat = conn.prepareStatement(statString);
-                        stat.setString(1, newPassword);
-                        stat.executeUpdate();
-                                               
-                    } catch (SQLException ex) {
-                        out.println("SQLException in Query.java");
-                        ex.printStackTrace(out);
-                    } finally
-                    {
-                        DBUtilities.closeResultSet(passwordResult); 
-                    }
 
-                    response.sendRedirect("homePage"); //change to contractor page
-                }
-            } catch (Exception ex) {
-                ex.printStackTrace(out);
-            } finally {
-                out.close();
-                DBUtilities.closeStatement(stat);
-                DBUtilities.closeStatement(statement);
-                dataSource.freeConnection(conn);
-            }
-        }
     }
 
     
