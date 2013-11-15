@@ -363,7 +363,9 @@ public class saveRating extends HttpServlet {
                             reviewNum = reviewID;
                         }
                     }
-                    reviewNum++;
+                    if(reviewNum != 1){
+                        reviewNum++;
+                    }
                     PreparedStatement stat5 = null;
                     try{
                         String statString2 = "INSERT INTO Review (`review_num`, `customer_email`, `contractor_email`, `review`) VALUES (?, ?, ?, ?)";

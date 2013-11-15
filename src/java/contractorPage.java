@@ -139,11 +139,13 @@ public class contractorPage extends HttpServlet {
             
             if(userType.equals("Guest")){
                 out.println("<a class=\"pure-button pure-button-disabled\" href=\"#\"> Pay Contractor </a> &nbsp;");
-                out.println("<a class=\"pure-button pure-button-disabled\" href=\"#\"> Rate Contractor </a> &nbsp;<br/><br/>");
+                out.println("<a class=\"pure-button pure-button-disabled\" href=\"#\"> Rate Contractor </a> &nbsp;");
+                out.println("<a class=\"pure-button pure-button-disabled\" href=\"#\"> Flag Contractor </a> &nbsp;<br/><br/>");
             }
             else if(userType.equals("contractor")){
                 out.println("<a class=\"pure-button pure-button-disabled\" href=\"#\"> Pay Contractor </a> &nbsp;");
-                out.println("<a class=\"pure-button pure-button-disabled\" href=\"#\"> Rate Contractor </a> &nbsp;<br/><br/>");
+                out.println("<a class=\"pure-button pure-button-disabled\" href=\"#\"> Rate Contractor </a> &nbsp;");
+                out.println("<a class=\"pure-button pure-button-disabled\" href=\"#\"> Flag Contractor </a> &nbsp;<br/><br/>");
             }
             else if(userType.equals("customer")){
                 out.println("<a class=\"pure-button\" href=\"payment?email=" + email + "\"> Pay Contractor </a> &nbsp;");
@@ -154,24 +156,46 @@ public class contractorPage extends HttpServlet {
                     paymentResult = statement5.executeQuery("SELECT * FROM Payment WHERE customer_email=\'" + customerEmailCurrent + "\' AND contractor_email=\'" + email + "\' AND reviewed=0");
                     boolean paymentFound = paymentResult.next();
                     if(paymentFound){
-                        out.println("<a class=\"pure-button\" href=\"rateContractor?email=" + email + "\"> Rate Contractor </a> &nbsp;<br/><br/>");
+                        out.println("<a class=\"pure-button\" href=\"rateContractor?email=" + email + "\"> Rate Contractor </a> &nbsp;");
                     }
                     else{
-                        out.println("<a class=\"pure-button pure-button-disabled\" href=\"#\"> Rate Contractor </a> &nbsp;<br/><br/>");
+                        out.println("<a class=\"pure-button pure-button-disabled\" href=\"#\"> Rate Contractor </a> &nbsp;");
                     }
-                    }catch(SQLException ex){
-                        out.println("SQLException in Query.java");
-                        ex.printStackTrace(out);
-                    }finally
-                    {
-                        DBUtilities.closeResultSet(paymentResult);
-                        DBUtilities.closeStatement(statement5);
+                }catch(SQLException ex){
+                    out.println("SQLException in Query.java");
+                    ex.printStackTrace(out);
+                }finally
+                {
+                    DBUtilities.closeResultSet(paymentResult);
+                    DBUtilities.closeStatement(statement5);
+                }
+                
+                ResultSet hasFlaggedResult = null;
+                Statement statement6 = null;
+                try{
+                    statement6 = conn.createStatement();
+                    hasFlaggedResult = statement6.executeQuery("SELECT * FROM Has_Flagged WHERE customer_email=\'" + customerEmailCurrent + "\' AND contractor_email=\'" + email + "\' AND is_flagged=1");
+                    boolean hasFlaggedFound = hasFlaggedResult.next();
+                    if(hasFlaggedFound){
+                        out.println("<a class=\"pure-button pure-button-disabled\" href=\"#\"> Flag Contractor </a> &nbsp;<br/><br/>");
                     }
+                    else{
+                        out.println("<a class=\"pure-button\" href=\"flagContractor?email=" + email + "\"> Flag Contractor </a> &nbsp;<br/><br/>");
+                    }
+                }catch(SQLException ex){
+                    out.println("SQLException in Query.java");
+                    ex.printStackTrace(out);
+                }finally
+                {
+                    DBUtilities.closeResultSet(hasFlaggedResult);
+                    DBUtilities.closeStatement(statement6);
+                }
                 
             }
             else if(userType.equals("admin")){
                 out.println("<a class=\"pure-button pure-button-disabled\" href=\"#\"> Pay Contractor </a> &nbsp;");
-                out.println("<a class=\"pure-button pure-button-disabled\" href=\"#\"> Rate Contractor </a> &nbsp;<br/><br/>");
+                out.println("<a class=\"pure-button pure-button-disabled\" href=\"#\"> Rate Contractor </a> &nbsp;");
+                out.println("<a class=\"pure-button pure-button-disabled\" href=\"#\"> Flag Contractor </a> &nbsp;<br/><br/>");
             }
             
             out.println("<div class=\"pure-g\">");
