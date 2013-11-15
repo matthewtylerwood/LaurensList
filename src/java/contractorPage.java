@@ -194,7 +194,7 @@ public class contractorPage extends HttpServlet {
                     phone = contractorResult.getString("phone");
                     info = contractorResult.getString("info");
                 }
-                out.println("<p>" + company + "<br />" + email + "<br />" + phone + "<br /><br />" + info + "</p>");
+                out.println("<p>" + contractorCompany + "<br />" + email + "<br />" + phone + "<br /><br />" + info + "</p>");
             }catch(SQLException ex){
                 out.println("SQLException in Query.java");
                 ex.printStackTrace(out);
