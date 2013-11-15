@@ -132,7 +132,7 @@ public class editContractorProfile extends HttpServlet {
             out.println("</div>");
             out.println("<div class=\"pure-control-group\">");
             out.println("<label for=\"info\">Tell your customers about your company</label>");
-            out.println("<textarea name=\"info\" rows=\"4\" cols=\"40\" value=\"" + info + "\" required=\"\" onfocus=\"if(this.value===this.defaultValue)this.value=\'\';\" onblur=\"if(this.value===\'\')this.value=this.defaultValue;\">Please put your Company info here</textarea>");
+            out.println("<textarea name=\"info\" rows=\"4\" cols=\"40\" required=\"\" >" + info +"</textarea>");
             out.println("</div>");
             out.println("<div class=\"pure-controls\">");
             out.println("<button type=\"submit\" class=\"pure-button pure-button-primary\">Submit</button> &nbsp;");

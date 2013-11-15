@@ -40,25 +40,21 @@ public class saveContractorProfile extends HttpServlet {
                 String phoneNew = request.getParameter("phone");
                 String infoNew = request.getParameter("info");
                 
-                statement = conn.createStatement();
-                getResult = statement.executeQuery("SELECT * FROM Contractor WHERE email=\'" + email + "\' ");
-                try {
+//                statement = conn.createStatement();
+//                getResult = statement.executeQuery("SELECT * FROM Contractor WHERE email=\'" + email + "\' ");
 
-                    String statString = "UPDATE Contractor SET email=?, company=?, phone=?, info=? WHERE email=\'" + email + "\'";
-                    stat = conn.prepareStatement(statString);
-                    stat.setString(1, emailNew);
-                    stat.setString(2, companyNew);
-                    stat.setString(3, phoneNew);
-                    stat.setString(4, infoNew);
-                    stat.executeUpdate();
+                String statString = "UPDATE Contractor SET email=?, company=?, phone=?, info=? WHERE email=\'" + email + "\'";
+                stat = conn.prepareStatement(statString);
+                stat.setString(1, emailNew);
+                stat.setString(2, companyNew);
+                stat.setString(3, phoneNew);
+                stat.setString(4, infoNew);
+                stat.executeUpdate();
 
-                } catch (SQLException ex) {
-                    out.println("SQLException in Query.java");
-                    ex.printStackTrace(out);
-                } finally
-                {
-                    DBUtilities.closeResultSet(getResult); 
-                }
+                contractor.setEmail(emailNew);
+                contractor.setCompany(companyNew);
+                contractor.setPhone(phoneNew);
+                contractor.setInfo(infoNew);
 
                 response.sendRedirect("homePage"); //change to contractor page
             } catch (Exception ex) {
