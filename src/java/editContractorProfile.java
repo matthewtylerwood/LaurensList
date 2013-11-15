@@ -100,7 +100,7 @@ public class editContractorProfile extends HttpServlet {
             
             
             out.println("<a class=\"pure-button\" href=\"contractorProfile\"> " + company + " </a> &nbsp;");
-            out.println("<a class=\"pure-button\" href=\"changePassword\"> Change Password </a> &nbsp;");
+            out.println("<a class=\"pure-button\" href=\"editContractorProfile\"> Change Profile </a> &nbsp;");
             out.println("<a class=\"pure-button\" href=\"logout\"> Logout </a> &nbsp;<br/><br/>");
             
                         
@@ -123,8 +123,7 @@ public class editContractorProfile extends HttpServlet {
             out.println("<input name=\"companyName\" type=\"text\" value=\"" + company + "\" required= />");
             out.println("</div>");
             out.println("<div class=\"pure-control-group\">");
-            out.println("<label for=\"email\">Email</label>");
-            out.println("<input name=\"email\" type=\"text\" value=\"" + email + "\" required= />");
+            out.println("<a class=\"pure-button\" href=\"changePassword\"> Change Password </a> &nbsp;");
             out.println("</div>");
             out.println("<div class=\"pure-control-group\">");
             out.println("<label for=\"phone\">Phone Number</label>");

@@ -100,7 +100,7 @@ public class contractorProfile extends HttpServlet {
             
             
             out.println("<a class=\"pure-button\" href=\"contractorProfile\"> " + company + " </a> &nbsp;");
-            out.println("<a class=\"pure-button\" href=\"changePassword\"> Change Password </a> &nbsp;");
+            out.println("<a class=\"pure-button\" href=\"editContractorProfile\"> Change Profile </a> &nbsp;");
             out.println("<a class=\"pure-button\" href=\"logout\"> Logout </a> &nbsp;<br/><br/>");
             
                         
