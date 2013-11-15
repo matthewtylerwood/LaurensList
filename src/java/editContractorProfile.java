@@ -116,8 +116,6 @@ public class editContractorProfile extends HttpServlet {
             out.println("<form action=\"saveContractorProfile\" method=\"post\" class=\"pure-form pure-form-aligned\">");
             out.println("<div id=\"center\">");
             out.println("<div class=\"center\">");
-            out.println("<div class=\"pure-g\">");
-            out.println("<div class=\"pure-u-1-4\">");
             out.println("<fieldset>");
             out.println("<legend> Update Information </legend>");
             out.println("<div class=\"pure-control-group\">");
@@ -141,8 +139,6 @@ public class editContractorProfile extends HttpServlet {
             out.println("<button type=\"reset\" class=\"pure-button\">Reset</button>");
             out.println("</div>");
             out.println("</fieldset>");
-            out.println("</div>");
-            out.println("</div>");
             out.println("</div>");
             out.println("</div>");
             out.println("</form>");
