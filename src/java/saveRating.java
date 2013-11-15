@@ -335,7 +335,8 @@ public class saveRating extends HttpServlet {
                     try{
                         String statString2 = "INSERT INTO Rating (`email`, `rating`) VALUES (?, ?)";
                         stat4 = conn.prepareStatement(statString2);
-                        stat4.setFloat(1, numRating);
+                        stat4.setString(1, contractorEmail);
+                        stat4.setFloat(2, numRating);
                         stat4.executeUpdate();
                     }catch(SQLException ex){
                         out.println("SQLException in Query.java");

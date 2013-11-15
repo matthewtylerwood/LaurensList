@@ -187,12 +187,14 @@ public class contractorPage extends HttpServlet {
                 boolean contractorFound = contractorResult.next();
                 String contractorCompany = "";
                 String phone = "";
+                String info = "";
                 if(contractorFound){
                     contractorCompany = contractorResult.getString("company");
                     email = contractorResult.getString("email");
                     phone = contractorResult.getString("phone");
+                    info = contractorResult.getString("info");
                 }
-                out.println("<p>" + contractorCompany + "<br />" + email + "<br />" + phone + "</p>");
+                out.println("<p>" + company + "<br />" + email + "<br />" + phone + "<br /><br />" + info + "</p>");
             }catch(SQLException ex){
                 out.println("SQLException in Query.java");
                 ex.printStackTrace(out);

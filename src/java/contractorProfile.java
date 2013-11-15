@@ -119,7 +119,7 @@ public class contractorProfile extends HttpServlet {
             out.println("<div class=\"pure-u-1-4\">");
             out.println("<fieldset>");
             out.println("<legend> Information </legend>");
-            out.println("<p>" + company + "<br />" + email + "<br />" + phone + "</p>");
+            out.println("<p>" + company + "<br />" + email + "<br />" + phone + "<br /><br />" + info + "</p>");
             out.println("</fieldset>");
             out.println("</div>");
             out.println("<div class=\"pure-u-1-2\">");
