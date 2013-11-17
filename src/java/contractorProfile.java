@@ -133,6 +133,7 @@ public class contractorProfile extends HttpServlet {
                 while(reviewResult.next()){
                     String customerEmail = reviewResult.getString("customer_email");
                     String review = reviewResult.getString("review");
+                    float stars = reviewResult.getFloat("stars");
                     
                     ResultSet customerResult = null;
                     Statement statement2 = null;
@@ -146,7 +147,7 @@ public class contractorProfile extends HttpServlet {
                             firstName = customerResult.getString("first_name");
                             lastName = customerResult.getString("last_name");
                         }
-                        out.println("<p>" + firstName + " " + lastName + "<br />" + review + "<br /><br /></p>");
+                        out.println("<p>" + firstName + " " + lastName + "&nbsp;&nbsp; (" + stars + "&nbsp;of&nbsp;5 stars)<br />" + review + "<br /><br /></p>");
                     }catch(SQLException ex){
                         out.println("SQLException in Query.java");
                         ex.printStackTrace(out);

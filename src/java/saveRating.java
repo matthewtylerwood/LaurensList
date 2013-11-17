@@ -70,6 +70,7 @@ public class saveRating extends HttpServlet {
             String contractorEmail = request.getParameter("contractorEmail");
            
             int numRatings;
+            float numRating = Float.parseFloat(numericRating);
             try{
                 statement = conn.createStatement();
                 starsResult = statement.executeQuery("SELECT * FROM Stars WHERE email=\'" + contractorEmail + "\'");
@@ -330,7 +331,6 @@ public class saveRating extends HttpServlet {
                         stat.executeUpdate();
                     }
                     //store new average
-                    float numRating = Float.parseFloat(numericRating);
                     PreparedStatement stat4 = null;
                     try{
                         String statString2 = "INSERT INTO Rating (`email`, `rating`) VALUES (?, ?)";
@@ -368,12 +368,13 @@ public class saveRating extends HttpServlet {
                     }
                     PreparedStatement stat5 = null;
                     try{
-                        String statString2 = "INSERT INTO Review (`review_num`, `customer_email`, `contractor_email`, `review`) VALUES (?, ?, ?, ?)";
+                        String statString2 = "INSERT INTO Review (`review_num`, `customer_email`, `contractor_email`, `review`, `stars`) VALUES (?, ?, ?, ?, ?)";
                         stat5 = conn.prepareStatement(statString2);
                         stat5.setInt(1, reviewNum);
                         stat5.setString(2, email);
                         stat5.setString(3, contractorEmail);
                         stat5.setString(4, review);
+                        stat5.setFloat(5, numRating);
                         stat5.executeUpdate();
                     }catch(SQLException ex){
                         out.println("SQLException in Query.java");
