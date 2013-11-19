@@ -137,7 +137,7 @@ public class adminProfile extends HttpServlet {
                         }
                         //contractorPage?email=grills@hotmail.com
                         //"<a href=\"contractorPage?email=" + result.getString("email") + "\">" + result.getString("company") + "</a>"
-                        out.println("<a href=\"contractorPage?email=" + email + "\">" + email + "</a>");
+                        out.println("the user <a href=\"contractorPage?email=" + email + "\">" + email + " </a> has been flagged");
                     }catch(SQLException ex){
                         out.println("SQLException in Query.java");
                         ex.printStackTrace(out);
