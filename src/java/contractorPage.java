@@ -217,6 +217,12 @@ public class contractorPage extends HttpServlet {
                     email = contractorResult.getString("email");
                     phone = contractorResult.getString("phone");
                     info = contractorResult.getString("info");
+                    
+                    String areaCode = phone.substring(0, 3);
+                    String threeDigit = phone.substring(3, 6);
+                    String fourDigit = phone.substring(6, 10);
+                    
+                    phone = "("+areaCode+")"+threeDigit+"-"+fourDigit+"";
                 }
                 out.println("<p>" + contractorCompany + "<br />" + email + "<br />" + phone + "<br /><br />" + info + "<br /><br /> <a href=\"https://www.google.com/search?q="+ contractorCompany +"\">More Information</a> <br /></p>");
             }catch(SQLException ex){

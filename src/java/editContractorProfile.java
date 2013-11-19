@@ -72,7 +72,7 @@ public class editContractorProfile extends HttpServlet {
         DBConnections dataSource = DBConnections.getInstance();
         Connection conn = dataSource.getConnection();
         Statement statement = null;
-        ResultSet reviewResult = null;
+//        ResultSet reviewResult = null;
         
              
         try {

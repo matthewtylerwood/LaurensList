@@ -58,6 +58,11 @@ public class contractorProfile extends HttpServlet {
                     company = contractor.getCompany();
                     phone = contractor.getPhone();
                     info = contractor.getInfo();
+                    
+                    String areaCode = phone.substring(0, 3);
+                    String threeDigit = phone.substring(3, 6);
+                    String fourDigit = phone.substring(6, 10);
+                    phone = "("+areaCode+")"+threeDigit+"-"+fourDigit+"";
                 }
                 else if(httpSession.getAttribute("userType").equals("admin"))
                 {

@@ -36,22 +36,19 @@ public class saveContractorProfile extends HttpServlet {
             String email = contractor.getEmail();
             try {
                 String companyNew = request.getParameter("companyName");
-                String emailNew = request.getParameter("email");
                 String phoneNew = request.getParameter("phone");
                 String infoNew = request.getParameter("info");
                 
-//                statement = conn.createStatement();
-//                getResult = statement.executeQuery("SELECT * FROM Contractor WHERE email=\'" + email + "\' ");
+                statement = conn.createStatement();
+                getResult = statement.executeQuery("SELECT * FROM Contractor WHERE email=\'" + email + "\' ");
 
-                String statString = "UPDATE Contractor SET email=?, company=?, phone=?, info=? WHERE email=\'" + email + "\'";
+                String statString = "UPDATE Contractor SET company=?, phone=?, info=? WHERE email=\'" + email + "\'";
                 stat = conn.prepareStatement(statString);
-                stat.setString(1, emailNew);
-                stat.setString(2, companyNew);
-                stat.setString(3, phoneNew);
-                stat.setString(4, infoNew);
+                stat.setString(1, companyNew);
+                stat.setString(2, phoneNew);
+                stat.setString(3, infoNew);
                 stat.executeUpdate();
 
-                contractor.setEmail(emailNew);
                 contractor.setCompany(companyNew);
                 contractor.setPhone(phoneNew);
                 contractor.setInfo(infoNew);
