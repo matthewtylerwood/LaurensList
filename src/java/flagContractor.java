@@ -33,8 +33,6 @@ public class flagContractor extends HttpServlet {
         String firstName = "";
         String lastName = "";
         String email = "";
-        String company = "";
-        String adminEmail = "";
         HttpSession httpSession;
 
         if (request.getSession(false) != null) {
@@ -47,14 +45,16 @@ public class flagContractor extends HttpServlet {
                     email = customer.getEmail();
                     userType = "customer";
                 } else if (httpSession.getAttribute("userType").equals("contractor")) {
-                    Contractor contractor = (Contractor) httpSession.getAttribute("user");
-                    company = contractor.getCompany();
-                    userType = "contractor";
+                    response.sendRedirect("homePage");
+                    return;
                 } else if (httpSession.getAttribute("userType").equals("admin")) {
-                    Admin admin = (Admin) httpSession.getAttribute("user");
-                    adminEmail = admin.getEmail();
-                    userType = "admin";
+                    response.sendRedirect("homePage");
+                    return;
                 }
+            }
+            else{
+                response.sendRedirect("homePage");
+                return;
             }
         }
         
@@ -70,6 +70,7 @@ public class flagContractor extends HttpServlet {
         }
         else{
         response.sendRedirect("homePage");
+        return;
         }
         
         try{

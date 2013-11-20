@@ -40,8 +40,6 @@ public class rateContractor extends HttpServlet {
         HttpSession httpSession;
         String firstName = "";
         String lastName = "";
-        String company = "";
-        String adminEmail = "";
         
         if(request.getSession(false) != null)
         {
@@ -56,19 +54,18 @@ public class rateContractor extends HttpServlet {
                 }
                 else if(httpSession.getAttribute("userType").equals("contractor"))
                 {
-                    Contractor contractor = (Contractor)httpSession.getAttribute("user");
-                    company = contractor.getCompany();
-                    userType = "contractor";
+                    response.sendRedirect("homePage");
+                    return;
                 }
                 else if(httpSession.getAttribute("userType").equals("admin"))
                 {
-                    Admin admin = (Admin)httpSession.getAttribute("user");
-                    adminEmail = admin.getEmail();
-                    userType = "admin";
+                    response.sendRedirect("homePage");
+                    return;
                 }
             }
             else{
                 response.sendRedirect("homePage");
+                return;
             }
         }
         
@@ -103,14 +100,8 @@ public class rateContractor extends HttpServlet {
             if (userType.equals("Guest")) {
                 out.println("<a class=\"pure-button\" href=\"login.html\"> Login </a> &nbsp;");
                 out.println("<a class=\"pure-button\" href=\"customerOrContractor.html\"> Create Account </a> &nbsp;");
-            } else if (userType.equals("contractor")) {
-                out.println("<a class=\"pure-button\" href=\"contractorProfile\"> " + company + " </a> &nbsp;");
-                out.println("<a class=\"pure-button\" href=\"logout\"> Logout </a> &nbsp;<br/><br/>");
             } else if (userType.equals("customer")) {
                 out.println("<a class=\"pure-button\" href=\"changePassword\"> " + firstName + " " + lastName + " </a> &nbsp;");
-                out.println("<a class=\"pure-button\" href=\"logout\"> Logout </a> &nbsp;<br/><br/>");
-            } else if (userType.equals("admin")) {
-                out.println("<a class=\"pure-button\" href=\"changePassword\"> " + adminEmail + " </a> &nbsp;");
                 out.println("<a class=\"pure-button\" href=\"logout\"> Logout </a> &nbsp;<br/><br/>");
             }
 
@@ -136,6 +127,7 @@ public class rateContractor extends HttpServlet {
             }
             else{
                 response.sendRedirect("homePage");
+                return;
             }
             out.println("<p>");
             out.println("<label for=\"numericRating\">Rate your experience</label>");

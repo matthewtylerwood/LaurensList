@@ -31,8 +31,6 @@ public class payment extends HttpServlet {
         String userType = "Guest";
         String firstName = "";
         String lastName = "";
-        String company = "";
-        String adminEmail = "";
         HttpSession httpSession;
 
         if (request.getSession(false) != null) {
@@ -44,17 +42,16 @@ public class payment extends HttpServlet {
                     lastName = customer.getLastName();
                     userType = "customer";
                 } else if (httpSession.getAttribute("userType").equals("contractor")) {
-                    Contractor contractor = (Contractor) httpSession.getAttribute("user");
-                    company = contractor.getCompany();
-                    userType = "contractor";
+                    response.sendRedirect("homePage");
+                    return;
                 } else if (httpSession.getAttribute("userType").equals("admin")) {
-                    Admin admin = (Admin) httpSession.getAttribute("user");
-                    adminEmail = admin.getEmail();
-                    userType = "admin";
+                    response.sendRedirect("homePage");
+                    return;
                 }
             }
             else{
                 response.sendRedirect("homePage");
+                return;
             }
         }
         try {
@@ -83,14 +80,8 @@ public class payment extends HttpServlet {
             if (userType.equals("Guest")) {
                 out.println("<a class=\"pure-button\" href=\"login.html\"> Login </a> &nbsp;");
                 out.println("<a class=\"pure-button\" href=\"customerOrContractor.html\"> Create Account </a> &nbsp;");
-            } else if (userType.equals("contractor")) {
-                out.println("<a class=\"pure-button\" href=\"contractorProfile\"> " + company + " </a> &nbsp;");
-                out.println("<a class=\"pure-button\" href=\"logout\"> Logout </a> &nbsp;<br/><br/>");
             } else if (userType.equals("customer")) {
                 out.println("<a class=\"pure-button\" href=\"changePassword\"> " + firstName + " " + lastName + " </a> &nbsp;");
-                out.println("<a class=\"pure-button\" href=\"logout\"> Logout </a> &nbsp;<br/><br/>");
-            } else if (userType.equals("admin")) {
-                out.println("<a class=\"pure-button\" href=\"changePassword\"> " + adminEmail + " </a> &nbsp;");
                 out.println("<a class=\"pure-button\" href=\"logout\"> Logout </a> &nbsp;<br/><br/>");
             }
 
@@ -222,6 +213,7 @@ public class payment extends HttpServlet {
             }
             else{
                 response.sendRedirect("homePage");
+                return;
             }
             out.println("<input name=\"contractorEmail\" type=\"hidden\" value=\"" + email + "\" /> ");
             

@@ -38,10 +38,6 @@ public class deleteContractor extends HttpServlet {
         PrintWriter out = response.getWriter();
         
         String userType = "Guest";
-        String firstName = "";
-        String lastName = "";
-        String email = "";
-        String company = "";
         String adminEmail = "";
         HttpSession httpSession;
 
@@ -49,20 +45,20 @@ public class deleteContractor extends HttpServlet {
             httpSession = request.getSession();
             if (httpSession.getAttribute("userType") != null) {
                 if (httpSession.getAttribute("userType").equals("customer")) {
-                    Customer customer = (Customer) httpSession.getAttribute("user");
-                    firstName = customer.getFirstName();
-                    lastName = customer.getLastName();
-                    email = customer.getEmail();
-                    userType = "customer";
+                    response.sendRedirect("homePage");
+                    return;
                 } else if (httpSession.getAttribute("userType").equals("contractor")) {
-                    Contractor contractor = (Contractor) httpSession.getAttribute("user");
-                    company = contractor.getCompany();
-                    userType = "contractor";
+                    response.sendRedirect("homePage");
+                    return;
                 } else if (httpSession.getAttribute("userType").equals("admin")) {
                     Admin admin = (Admin) httpSession.getAttribute("user");
                     adminEmail = admin.getEmail();
                     userType = "admin";
                 }
+            }
+            else{
+                response.sendRedirect("homePage");
+                return;
             }
         }
         
@@ -82,6 +78,7 @@ public class deleteContractor extends HttpServlet {
         }
         else{
         response.sendRedirect("homePage");
+        return;
         }
         
         try{
