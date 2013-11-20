@@ -57,6 +57,8 @@ public class contractorCreateAccount extends HttpServlet {
                 response.sendRedirect("contractorCreateAccount.html");
             } else if (!password.equals(confirmPassword)) {
                 response.sendRedirect("contractorCreateAccount.html");
+            } else if (phone.length()!=10) {
+                response.sendRedirect("contractorCreateAccount.html");
             } else {
 
                 try {
