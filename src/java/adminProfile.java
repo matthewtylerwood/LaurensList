@@ -131,14 +131,16 @@ public class adminProfile extends HttpServlet {
                         contractorResult = statement2.executeQuery("SELECT * FROM Flagged WHERE email=\'" + contractorEmail + "\'");
                         boolean contractorFound = contractorResult.next();
                         String email = "";
+                        int number = 0;
                    
                         if(contractorFound){
                             email = contractorResult.getString("email");
+                            number = contractorResult.getInt("flag");
                             
                         }
                         //contractorPage?email=grills@hotmail.com
                         //"<a href=\"contractorPage?email=" + result.getString("email") + "\">" + result.getString("company") + "</a>"
-                        out.println("the user <a href=\"contractorPage?email=" + email + "\">" + email + " </a> has been flagged <br />");
+                        out.println("the user <a href=\"contractorPage?email=" + email + "\">" + email + " </a> has been flagged " + number + " time(s).<br />");
                     }catch(SQLException ex){
                         out.println("SQLException in Query.java");
                         ex.printStackTrace(out);
