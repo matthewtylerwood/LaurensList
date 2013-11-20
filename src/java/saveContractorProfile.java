@@ -39,21 +39,28 @@ public class saveContractorProfile extends HttpServlet {
                 String phoneNew = request.getParameter("phone");
                 String infoNew = request.getParameter("info");
                 
-                statement = conn.createStatement();
-                getResult = statement.executeQuery("SELECT * FROM Contractor WHERE email=\'" + email + "\' ");
+                if (phoneNew.length()!=10) 
+                {
+                    response.sendRedirect("contractorCreateAccount.html");
+                }
+                else
+                {
+                    statement = conn.createStatement();
+                    getResult = statement.executeQuery("SELECT * FROM Contractor WHERE email=\'" + email + "\' ");
 
-                String statString = "UPDATE Contractor SET company=?, phone=?, info=? WHERE email=\'" + email + "\'";
-                stat = conn.prepareStatement(statString);
-                stat.setString(1, companyNew);
-                stat.setString(2, phoneNew);
-                stat.setString(3, infoNew);
-                stat.executeUpdate();
+                    String statString = "UPDATE Contractor SET company=?, phone=?, info=? WHERE email=\'" + email + "\'";
+                    stat = conn.prepareStatement(statString);
+                    stat.setString(1, companyNew);
+                    stat.setString(2, phoneNew);
+                    stat.setString(3, infoNew);
+                    stat.executeUpdate();
 
-                contractor.setCompany(companyNew);
-                contractor.setPhone(phoneNew);
-                contractor.setInfo(infoNew);
+                    contractor.setCompany(companyNew);
+                    contractor.setPhone(phoneNew);
+                    contractor.setInfo(infoNew);
 
-                response.sendRedirect("homePage"); //change to contractor page
+                    response.sendRedirect("homePage"); //change to contractor page
+                }
             } catch (Exception ex) {
                 ex.printStackTrace(out);
             } finally {
