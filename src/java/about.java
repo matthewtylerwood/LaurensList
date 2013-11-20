@@ -59,7 +59,7 @@ public class about extends HttpServlet{
             out.println("<html xmlns=\"http://www.w3.org/1999/xhtml\">");
             out.println("<head>");
             out.println("<meta http-equiv=\"Content-Type\" content=\"text/html; charset=utf-8\" />");
-            out.println("<title> Search Results </title>");
+            out.println("<title> About Lauren's List</title>");
             out.println("<link rel=\"stylesheet\" href=\"http://yui.yahooapis.com/pure/0.3.0/pure-nr-min.css\" />");
             out.println("<link rel=\"stylesheet\" href=\"style.css\" />");
             out.println("</head>");

@@ -74,7 +74,7 @@ public class homePage extends HttpServlet {
             out.println("<html xmlns=\"http://www.w3.org/1999/xhtml\">");
             out.println("<head>");
             out.println("<meta http-equiv=\"Content-Type\" content=\"text/html; charset=utf-8\" />");
-            out.println("<title> Lauren's List Home Guest </title>");
+            out.println("<title> Lauren's List</title>");
             out.println("<link rel=\"stylesheet\" href=\"http://yui.yahooapis.com/pure/0.3.0/pure-nr-min.css\" />");
             out.println("<link rel=\"stylesheet\" href=\"style.css\" />");
             out.println("<style>");
