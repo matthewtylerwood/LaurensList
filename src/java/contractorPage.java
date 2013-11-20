@@ -195,7 +195,8 @@ public class contractorPage extends HttpServlet {
             else if(userType.equals("admin")){
                 out.println("<a class=\"pure-button pure-button-disabled\" href=\"#\"> Pay Contractor </a> &nbsp;");
                 out.println("<a class=\"pure-button pure-button-disabled\" href=\"#\"> Rate Contractor </a> &nbsp;");
-                out.println("<a class=\"pure-button pure-button-disabled\" href=\"#\"> Flag Contractor </a> &nbsp;<br/><br/>");
+                out.println("<a class=\"pure-button pure-button-disabled\" href=\"#\"> Flag Contractor </a> &nbsp;");
+                out.println("<a class=\"pure-button\" href=\"deleteContractor?email=" + email + "\"> Delete Contractor </a> &nbsp;<br/><br/>");
             }
             
             out.println("<div class=\"pure-g\">");
