@@ -94,7 +94,8 @@ public class adminProfile extends HttpServlet {
             out.println("<br/>");
             
             
-            out.println("<a class=\"pure-button\" href=\"changePassword\"> " + adminEmail + " </a> &nbsp;");
+            out.println("<a class=\"pure-button\" href=\"adminProfile\"> " + adminEmail + " </a> &nbsp;");
+            out.println("<a class=\"pure-button\" href=\"changePassword\"> Change Password </a> &nbsp;");
             out.println("<a class=\"pure-button\" href=\"logout\"> Logout </a> &nbsp;<br/><br/>");
             
                         
@@ -137,7 +138,7 @@ public class adminProfile extends HttpServlet {
                         }
                         //contractorPage?email=grills@hotmail.com
                         //"<a href=\"contractorPage?email=" + result.getString("email") + "\">" + result.getString("company") + "</a>"
-                        out.println("the user <a href=\"contractorPage?email=" + email + "\">" + email + " </a> has been flagged");
+                        out.println("the user <a href=\"contractorPage?email=" + email + "\">" + email + " </a> has been flagged <br />");
                     }catch(SQLException ex){
                         out.println("SQLException in Query.java");
                         ex.printStackTrace(out);

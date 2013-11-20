@@ -105,7 +105,7 @@ public class changePassword extends HttpServlet {
                 out.println("<a class=\"pure-button\" href=\"logout\"> Logout </a> &nbsp;<br/><br/>");
             }
             else if(userType.equals("admin")){
-                out.println("<a class=\"pure-button\" href=\"changePassword\"> " + adminEmail + " </a> &nbsp;");
+                out.println("<a class=\"pure-button\" href=\"adminProfile\"> " + adminEmail + " </a> &nbsp;");
                 out.println("<a class=\"pure-button\" href=\"logout\"> Logout </a> &nbsp;<br/><br/>");
             }
             

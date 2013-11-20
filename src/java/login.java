@@ -36,13 +36,13 @@ public class login extends HttpServlet {
            
            if (adminLogin && !contractorLogin && !customerLogin) 
            {
-               response.sendRedirect("homePage"); //change to admin page
+               response.sendRedirect("adminProfile");
            } 
            else if(!adminLogin && contractorLogin && !customerLogin)
            {
                response.sendRedirect("contractorProfile");
            }
-           else if(/*!managerLogin &&*/ !contractorLogin && customerLogin) 
+           else if(!adminLogin && !contractorLogin && customerLogin) 
            {
                response.sendRedirect("homePage");
            }

@@ -106,9 +106,8 @@ public class homePage extends HttpServlet {
                 out.println("<a class=\"pure-button\" href=\"logout\"> Logout </a> &nbsp;<br/><br/>");
             }
             else if(userType.equals("admin")){
-                out.println("<a class=\"pure-button\" href=\"changePassword\"> Welcome, " + adminEmail + " </a> &nbsp;");
+                out.println("<a class=\"pure-button\" href=\"adminProfile\"> Welcome, " + adminEmail + " </a> &nbsp;");
                 out.println("<a class=\"pure-button\" href=\"logout\"> Logout </a> &nbsp;<br/><br/>");
-                out.println("<a class=\"pure-button\" href=\"adminProfile\"> Flagged Profiles </a> &nbsp;<br/><br/>");
             }
             out.println("<a class=\"pure-button\" href=\"about\"> What is Lauren's List? </a> &nbsp;");
                 
