@@ -349,7 +349,7 @@ public class saveRating extends HttpServlet {
                 }
                        
                 //Save Review
-                int reviewNum = 1;
+                int reviewNum = 0;
                 ResultSet reviewResult = null;
                 Statement statement3 = null;
                 try{
@@ -363,7 +363,10 @@ public class saveRating extends HttpServlet {
                             reviewNum = reviewID;
                         }
                     }
-                    if(reviewNum != 1){
+                    if(reviewNum == 0){
+                        reviewNum = 1;
+                    }
+                    else{
                         reviewNum++;
                     }
                     PreparedStatement stat5 = null;
