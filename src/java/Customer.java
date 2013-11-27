@@ -60,7 +60,11 @@ public class Customer {
     }
     // </editor-fold>
     
-    
+ /*
+ * Code for loggining in the Customer
+ * checks to make sure that it is the Customer logging in
+ * set the user type to customer if the information matches the data base
+ */
     public boolean login(String email, String password, PrintWriter out, HttpServletRequest request)
     {
         DBConnections dataSource = DBConnections.getInstance();

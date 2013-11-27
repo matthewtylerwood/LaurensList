@@ -1,3 +1,6 @@
+/*
+ * Code given by Rikk
+ */
 import java.sql.*;
 
 public class DBUtilities

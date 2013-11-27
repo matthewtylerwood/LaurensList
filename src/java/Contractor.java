@@ -8,7 +8,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
 /*
- * Represents a Customer of Lauren's List.
+ * Represents a Contractor of Lauren's List.
  */
 public class Contractor {
     private String userType;
@@ -70,7 +70,11 @@ public class Contractor {
     }
     // </editor-fold>
     
-    
+     /*
+ * Code for loggining in the Contractor
+ * checks to make sure that it is the contractor logging in
+ * set the user type to contractor if the information matches the data base
+ */
     public boolean login(String email, String password, PrintWriter out, HttpServletRequest request)
     {
         DBConnections dataSource = DBConnections.getInstance();

@@ -1,6 +1,5 @@
 /*
- * To change this template, choose Tools | Templates
- * and open the template in the editor.
+ * Code for the administrators profile page
  */
 
 import java.io.IOException;
@@ -42,7 +41,7 @@ public class adminProfile extends HttpServlet {
         String company = "";
         String adminEmail = "";
         HttpSession httpSession;
-        
+        //makes sure that the user is an admin
         if(request.getSession(false) != null)
         {
             httpSession = request.getSession();
@@ -116,7 +115,7 @@ public class adminProfile extends HttpServlet {
             
             out.println("<fieldset>");
             out.println("<legend> Flagged Profiles </legend>");
-                        
+            //gives all the pages that have been flagged, and the number of times that they have been flagged            
             try {
                 statement = conn.createStatement();
                 flagResult = statement.executeQuery("SELECT * FROM Flagged");

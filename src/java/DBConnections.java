@@ -1,3 +1,6 @@
+ /*
+ * Code given by Rikk
+ */
 import java.sql.*;
 
 public class DBConnections
@@ -12,7 +15,9 @@ public class DBConnections
         try
         {
             String driver = "com.mysql.jdbc.Driver";
-
+ /*
+ * With this exception where we enter our group username and password
+ */
             username = "dcsp03";
             password = "Group3pw1$";
             url = "jdbc:mysql://localhost/" + username;

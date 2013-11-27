@@ -1,3 +1,6 @@
+/*
+ * Code that checks if a credit card is valid credit card
+ */
 public class CardValidator 
 {
     private static void CardValidator()

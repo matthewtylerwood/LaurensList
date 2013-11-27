@@ -8,7 +8,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
 /*
- * Represents a Customer of Lauren's List.
+ * Represents a Admin of Lauren's List.
  */
 public class Admin {
     private String userType;
@@ -40,7 +40,11 @@ public class Admin {
     }
     // </editor-fold>
     
-    
+ /*
+ * Code for loggining in the admin
+ * checks to make sure that it is the admin logging in
+ * set the user type to admin if the information matches the data base
+ */
     public boolean login(String email, String password, PrintWriter out, HttpServletRequest request)
     {
         DBConnections dataSource = DBConnections.getInstance();
