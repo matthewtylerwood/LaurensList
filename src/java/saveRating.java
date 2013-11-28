@@ -1,6 +1,5 @@
 /*
- * To change this template, choose Tools | Templates
- * and open the template in the editor.
+ * code to save the star rating to the data base
  */
 
 import java.io.IOException;

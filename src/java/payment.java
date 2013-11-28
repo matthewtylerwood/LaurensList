@@ -1,6 +1,5 @@
 /*
- * To change this template, choose Tools | Templates
- * and open the template in the editor.
+ * code for customers to verify payment
  */
 
 import java.io.IOException;
@@ -32,7 +31,7 @@ public class payment extends HttpServlet {
         String firstName = "";
         String lastName = "";
         HttpSession httpSession;
-
+        // makes sure the user is a customer
         if (request.getSession(false) != null) {
             httpSession = request.getSession();
             if (httpSession.getAttribute("userType") != null) {

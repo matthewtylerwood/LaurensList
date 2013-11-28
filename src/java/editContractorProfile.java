@@ -1,6 +1,5 @@
 /*
- * To change this template, choose Tools | Templates
- * and open the template in the editor.
+ * code for contractors to edit their profiles
  */
 
 import java.io.IOException;
@@ -42,7 +41,7 @@ public class editContractorProfile extends HttpServlet {
         String phone = "";
         String info = "";
         HttpSession httpSession;
-        
+        //makes sure the user is a contractor
         if(request.getSession(false) != null)
         {
             httpSession = request.getSession();

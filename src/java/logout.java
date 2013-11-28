@@ -48,7 +48,7 @@ public class logout extends HttpServlet {
         }
         
         try {
-            /* TODO output your page here. You may use following sample code. */
+            
             out.println("<html>");
             out.println("<head>");
             out.println("<title>Servlet logout</title>");            

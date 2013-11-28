@@ -1,6 +1,5 @@
 /*
- * To change this template, choose Tools | Templates
- * and open the template in the editor.
+ * code for the contractors profile when the user is the contractor
  */
 
 import java.io.IOException;
@@ -42,7 +41,7 @@ public class contractorProfile extends HttpServlet {
         String phone = "";
         String info = "";
         HttpSession httpSession;
-        
+        // makes sure the user is a contractor
         if(request.getSession(false) != null)
         {
             httpSession = request.getSession();
@@ -130,7 +129,7 @@ public class contractorProfile extends HttpServlet {
             out.println("<div class=\"pure-u-1-2\">");
             out.println("<fieldset>");
             out.println("<legend> Reviews </legend>");
-                        
+            //shows all the reviews          
             try {
                 statement = conn.createStatement();
                 reviewResult = statement.executeQuery("SELECT * FROM Review WHERE contractor_email=\'" + email + "\'");
@@ -183,6 +182,7 @@ public class contractorProfile extends HttpServlet {
             
             ResultSet ratingResult = null;
             Statement statement3 = null;
+            //shows the star rating
             try{
                 statement3 = conn.createStatement();
                 ratingResult = statement3.executeQuery("SELECT * FROM Rating WHERE email=\'" + email + "\'");

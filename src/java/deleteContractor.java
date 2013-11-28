@@ -1,6 +1,5 @@
 /*
- * To change this template, choose Tools | Templates
- * and open the template in the editor.
+ * code for the admin to delete contractor's
  */
 
 import java.io.IOException;
@@ -40,7 +39,7 @@ public class deleteContractor extends HttpServlet {
         String userType = "Guest";
         String adminEmail = "";
         HttpSession httpSession;
-
+        // makes sure the user is an admin
         if (request.getSession(false) != null) {
             httpSession = request.getSession();
             if (httpSession.getAttribute("userType") != null) {

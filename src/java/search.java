@@ -1,4 +1,4 @@
-
+// code for the search function
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.sql.Connection;
@@ -36,7 +36,7 @@ public class search extends HttpServlet {
         String lastName = "";
         String company = "";
         String adminEmail = "";
-        
+        // checks user type
         if(request.getSession(false) != null)
         {
             httpSession = request.getSession();
@@ -70,7 +70,7 @@ public class search extends HttpServlet {
         PreparedStatement stat = null;
         ResultSet result = null;
         String statString;
-        
+        // searches the database
         try 
         {
             statString = "SELECT * FROM Contractor WHERE company LIKE ? OR info LIKE ?;";

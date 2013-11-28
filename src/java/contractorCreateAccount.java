@@ -1,6 +1,5 @@
 /*
- * To change this template, choose Tools | Templates
- * and open the template in the editor.
+ *code for the contractor to create an account
  */
 
 import java.io.IOException;
@@ -52,7 +51,7 @@ public class contractorCreateAccount extends HttpServlet {
             String password = request.getParameter("password");
             String confirmPassword = request.getParameter("passwordConfirm");
             String info = request.getParameter("info");
-
+            // checks to make sure that the contractor has an account
             if (email.equals("") || password.equals("") || confirmPassword.equals("") || company.equals("") || phone.equals("") || info.equals("") || info.equals("Please put your Company info here")) {
                 response.sendRedirect("contractorCreateAccount.html");
             } else if (!password.equals(confirmPassword)) {
@@ -69,7 +68,7 @@ public class contractorCreateAccount extends HttpServlet {
                     boolean contractorFound = contractorResult.next();
                     adminResult = statement.executeQuery("SELECT * FROM Admin WHERE email=\'" + email + "\'");
                     boolean adminFound = adminResult.next();
-
+                    // inserts the contractor info into the database
                     if (!customerFound && !contractorFound && !adminFound) {
                         String statString = "INSERT INTO Contractor (`email`, `password`, `company`"
                                 + ", `phone`, `info`) VALUES (?, MD5(?), ?, ?, ?)";

@@ -1,6 +1,5 @@
 /*
- * To change this template, choose Tools | Templates
- * and open the template in the editor.
+ * code to allow user to change their password
  */
 
 import java.io.IOException;
@@ -39,7 +38,7 @@ public class changePassword extends HttpServlet {
         String company = "";
         String adminEmail = "";
         HttpSession httpSession;
-        
+        //checks the user type
         if(request.getSession(false) != null)
         {
             httpSession = request.getSession();
@@ -91,7 +90,7 @@ public class changePassword extends HttpServlet {
             out.println("</div>");
             out.println("<div class=\"right\" style=\"display:inline-block\">");
             out.println("<br/>");
-            
+            //code for the buttons at top right
             if(userType.equals("Guest")){
                 out.println("<a class=\"pure-button\" href=\"login.html\"> Login </a> &nbsp;");
                 out.println("<a class=\"pure-button\" href=\"customerOrContractor.html\"> Create Account </a> &nbsp;");

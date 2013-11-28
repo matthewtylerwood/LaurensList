@@ -1,6 +1,5 @@
 /*
- * To change this template, choose Tools | Templates
- * and open the template in the editor.
+ * code for validating a users profile.
  */
 
 import java.io.IOException;
@@ -34,7 +33,7 @@ public class paymentConfirm extends HttpServlet {
         String lastName = "";
         String email = "";
         HttpSession httpSession;
-
+        // makes sure user is a customer
         if (request.getSession(false) != null) {
             httpSession = request.getSession();
             if (httpSession.getAttribute("userType") != null) {
@@ -63,7 +62,7 @@ public class paymentConfirm extends HttpServlet {
         Statement statement = null;
         PreparedStatement stat = null;
         ResultSet paymentResult = null;
-        
+        // code  for validating credit cards
         try {
             String firstNamePay = request.getParameter("firstNamePay"); 
             String lastNamePay = request.getParameter("lastNamePay");

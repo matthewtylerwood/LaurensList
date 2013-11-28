@@ -1,6 +1,5 @@
 /*
- * To change this template, choose Tools | Templates
- * and open the template in the editor.
+ * code for the contractors profile when being view when you are not the contractor
  */
 
 import java.io.IOException;
@@ -42,7 +41,7 @@ public class contractorPage extends HttpServlet {
         String company = "";
         String adminEmail = "";
         HttpSession httpSession;
-        
+        //checks to make sure the user is not a contractor
         if(request.getSession(false) != null)
         {
             httpSession = request.getSession();
@@ -98,7 +97,7 @@ public class contractorPage extends HttpServlet {
             out.println("</div>");
             out.println("<div class=\"right\" style=\"display:inline-block\">");
             out.println("<br/>");
-            
+            //buttons at the top right
             if(userType.equals("Guest")){
                 out.println("<a class=\"pure-button\" href=\"login.html\"> Login </a> &nbsp;");
                 out.println("<a class=\"pure-button\" href=\"customerOrContractor.html\"> Create Account </a> &nbsp;");
@@ -136,7 +135,7 @@ public class contractorPage extends HttpServlet {
             else{
                 response.sendRedirect("homePage");
             }
-            
+            //locks certain buttons depending on what the user type is
             if(userType.equals("Guest")){
                 out.println("<a class=\"pure-button pure-button-disabled\" href=\"#\"> Pay Contractor </a> &nbsp;");
                 out.println("<a class=\"pure-button pure-button-disabled\" href=\"#\"> Rate Contractor </a> &nbsp;");
@@ -155,6 +154,7 @@ public class contractorPage extends HttpServlet {
                     statement5 = conn.createStatement();
                     paymentResult = statement5.executeQuery("SELECT * FROM Payment WHERE customer_email=\'" + customerEmailCurrent + "\' AND contractor_email=\'" + email + "\' AND reviewed=0");
                     boolean paymentFound = paymentResult.next();
+                    // must pay in order to rate the contractor
                     if(paymentFound){
                         out.println("<a class=\"pure-button\" href=\"rateContractor?email=" + email + "\"> Rate Contractor </a> &nbsp;");
                     }
@@ -176,6 +176,7 @@ public class contractorPage extends HttpServlet {
                     statement6 = conn.createStatement();
                     hasFlaggedResult = statement6.executeQuery("SELECT * FROM Has_Flagged WHERE customer_email=\'" + customerEmailCurrent + "\' AND contractor_email=\'" + email + "\' AND is_flagged=1");
                     boolean hasFlaggedFound = hasFlaggedResult.next();
+                    //you only can flag the contractor once
                     if(hasFlaggedFound){
                         out.println("<a class=\"pure-button pure-button-disabled\" href=\"#\"> Flag Contractor </a> &nbsp;<br/><br/>");
                     }
@@ -192,6 +193,7 @@ public class contractorPage extends HttpServlet {
                 }
                 
             }
+            //admin can do anything
             else if(userType.equals("admin")){
                 out.println("<a class=\"pure-button pure-button-disabled\" href=\"#\"> Pay Contractor </a> &nbsp;");
                 out.println("<a class=\"pure-button pure-button-disabled\" href=\"#\"> Rate Contractor </a> &nbsp;");
@@ -203,7 +205,7 @@ public class contractorPage extends HttpServlet {
             out.println("<div class=\"pure-u-1-4\">");
             out.println("<fieldset>");
             out.println("<legend> Information </legend>");
-            
+            //sets up the contractor's profile
             ResultSet contractorResult = null;
             Statement statement4 = null;
             try{
@@ -298,7 +300,7 @@ public class contractorPage extends HttpServlet {
                 ratingResult = statement3.executeQuery("SELECT * FROM Rating WHERE email=\'" + email + "\'");
                 boolean ratingFound = ratingResult.next();
                 float rating = 0;
-                
+                // gets the star rating
                 if(ratingFound){
                     rating = ratingResult.getFloat("rating");
                 }

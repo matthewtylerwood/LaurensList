@@ -1,6 +1,5 @@
 /*
- * To change this template, choose Tools | Templates
- * and open the template in the editor.
+ * code for customers to flag contractors profiles
  */
 
 import java.io.IOException;
@@ -34,7 +33,7 @@ public class flagContractor extends HttpServlet {
         String lastName = "";
         String email = "";
         HttpSession httpSession;
-
+        //makes sure the user is a customer
         if (request.getSession(false) != null) {
             httpSession = request.getSession();
             if (httpSession.getAttribute("userType") != null) {
@@ -72,7 +71,7 @@ public class flagContractor extends HttpServlet {
         response.sendRedirect("homePage");
         return;
         }
-        
+        // allows the customer to flag the contractors profile
         try{
             statement = conn.createStatement();
             flaggedResult = statement.executeQuery("SELECT * FROM Flagged WHERE email=\'" + contractorEmail + "\'");

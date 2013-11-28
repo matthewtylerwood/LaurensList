@@ -29,7 +29,7 @@ public class savePassword extends HttpServlet {
         ResultSet passwordResult = null;
 
         HttpSession httpSession = request.getSession();
-
+        //gets the old password from the  data base
         if(httpSession.getAttribute("userType").equals("customer"))
         {
             Customer customer = (Customer)httpSession.getAttribute("user");
@@ -53,7 +53,7 @@ public class savePassword extends HttpServlet {
                 else 
                 {
                     try {
-                        
+                        //sets the new password in the data base
                         String statString = "UPDATE Customer SET password=MD5(?) WHERE email=\'" + email + "\'";
                         stat = conn.prepareStatement(statString);
                         stat.setString(1, newPassword);
@@ -83,6 +83,7 @@ public class savePassword extends HttpServlet {
             Contractor contractor = (Contractor)httpSession.getAttribute("user");
             String email = contractor.getEmail();
             try {
+                //gets old password from data base
                 String oldPassword = request.getParameter("password");
                 String newPassword = request.getParameter("passwordNew");
                 String confirmNewPassword = request.getParameter("passwordNewConfirm");
@@ -101,7 +102,7 @@ public class savePassword extends HttpServlet {
                 else 
                 {
                     try {
-                        
+                        //updates new password in the data base
                         String statString = "UPDATE Contractor SET password=MD5(?) WHERE email=\'" + email + "\'";
                         stat = conn.prepareStatement(statString);
                         stat.setString(1, newPassword);

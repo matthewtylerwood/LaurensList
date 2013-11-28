@@ -1,3 +1,6 @@
+/*
+ * code for creating an account if the user is a customer
+ */
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.sql.Connection;
@@ -29,7 +32,7 @@ public class customerCreateAccount extends HttpServlet {
         ResultSet contractorResult = null;
         ResultSet adminResult = null;
         Customer customer = new Customer();
-        
+    
         try {
             String firstName = request.getParameter("firstName");
             String lastName = request.getParameter("lastName");
@@ -51,7 +54,7 @@ public class customerCreateAccount extends HttpServlet {
                     boolean contractorFound = contractorResult.next();
                     adminResult = statement.executeQuery("SELECT * FROM Admin WHERE email=\'" + email + "\'");
                     boolean adminFound = adminResult.next();
-
+                    //inserts the contractors info into the database
                     if (!customerFound && !contractorFound && !adminFound) {
                         String statString = "INSERT INTO Customer (`email`, `password`, `first_name`"
                                 + ", `last_name`) VALUES (?, MD5(?), ?, ?)";
